@@ -1,0 +1,10 @@
+data/
+*.npy
+*.jpg
+*.png
+__pycache__/
+*.aux
+*.log
+*.blg
+*.out
+.DS_Store
