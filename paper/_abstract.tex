@@ -1,0 +1,51 @@
+Claims that a model \emph{cannot} do something (impossibility,
+information limits, irreducible error) are treated as durable
+conclusions, yet they are as prone to artifact as claims that a model
+\emph{can}. We document a worked example end to end. Investigating the
+canonical ``should I eat this mushroom?'' decision, we built a careful,
+reproducible, adversarially-verified study and concluded that the task
+is \textbf{information-limited}: on real image embeddings a strong
+aggregate separability (AUROC 0.94) coexisted with an apparently
+irreducible \textasciitilde5\% confidently-wrong ``false-eat'' residual
+that \emph{no method in a panel of \textasciitilde18} could remove, with
+formal divergence-floor and data-processing arguments to explain why,
+and decision-curve analysis showing abstention dominates. The conclusion
+survived an adversarial-verification process that had already caught two
+of our own \emph{positive} results as rigged. It was wrong anyway.
+Within the same pipeline and the same pairs, a stronger frozen encoder
+(DINOv2) cut the false-eat to near zero: \textbf{≤0.7\%} per cell
+un-cropped (≤1.0\% under a substrate crop; pooled 95\% upper bound
+\textbf{0.4\%}), where the weak encoder left \textbf{0.1--21.3\%}, lower
+within every pair. This included the freshly-scraped textbook
+``you-need-a-microscope'' confusions (honey-mushroom vs deadly
+\emph{Galerina}, where it cleared 0 of 150 held-out poisons). What
+matters is the encoder-dependence, not the absolute rate. (The
+strong-encoder cells are near-zero rather than exact zeros: at the
+original ≈60-specimen sampling they read a bare ``0.0\%'' whose ≈4.9\%
+upper bound overlapped the original residual. At full sampling they read
+0.1--0.7\%, with a single-cell bound ≈2\% and a pooled bound ≈0.4\%.) An
+information limit is a property of the \emph{photograph} and would bind
+every encoder equally, so a stronger backbone that beats a weaker one
+within every pair is incompatible with one: the ``information limit''
+was a \textbf{weak-baseline artifact}. We show this across \textbf{six
+lethal look-alike decisions spanning five biological groups} (fungi,
+plants, reptiles, arachnids, amphibians), \textbf{three anchored to
+externally-published indistinguishability claims} (coral-snake mimicry,
+\citep{pfennig2001}; brown-recluse misidentification,
+\citep{vetter2000}; poison-frog mimicry, \citep{symula2001}). In every
+group the weak encoder leaves a large false-safe rate (often
+near-chance, clearing up to half of the dangerous specimens) that a
+stronger frozen encoder beats within every pair: to near zero in five of
+six groups, and always far below the weak baseline. One small-\emph{n}
+poison-frog pair is the honest exception, at \textasciitilde10\% against
+the weak encoder's 33\%. We offer the representation-invariance test as
+a portable protocol for frozen-representation limit claims, not a
+general theorem about all safety-negatives, and we distill the
+post-mortem (a weak baseline, a curated benchmark mistaken for the
+field, and a true-but-empirically-vacuous theory whose antecedent we
+never checked) into a checklist. The lesson generalizes beyond
+mushrooms: \emph{benchmark separability is not field safety, and a
+limitation claim is only as strong as the baseline that fails to beat
+it.}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}

@@ -1,0 +1,933 @@
+\subsection{1. Introduction}\label{introduction}
+
+A large fraction of machine-learning writing argues that a method
+\emph{helps}. A smaller, influential fraction argues that something
+\emph{cannot be done}: an information limit, an irreducible error, an
+impossibility. Such negative claims are valuable precisely because they
+redirect effort: if a task is information-limited, the rational response
+is to stop building models and go collect a different signal. They are
+also resistant to revision, because they feel like theorems and are
+rarely re-examined.
+
+This paper is a fully-worked cautionary study of how a negative claim
+can be confidently produced, defended against adversarial scrutiny, and
+still be false. It is anchored on one mushroom self-refutation and
+replicated across five further look-alike decisions in other kingdoms
+(§3.1--§3.2), three of them re-examinations of externally-published
+indistinguishability claims, to show the failure is not domain-specific.
+We did not set out to write it. We set out to answer whether ``should I
+eat this mushroom?'' is answerable from a photograph, and concluded
+after months of work that it is not, that the limit is
+\emph{information}, not method, and wrote that paper. Then, preparing it
+for review, we did the one thing the original investigation never did:
+we replaced a deliberately sovereignty-preserving but weak frozen
+encoder with a stronger one. The central result did not survive.
+
+We report the full sequence (the wrong conclusion, the refutation, and
+the anatomy of the error) because the failure mode appears general:
+safety-negative claims inherit the weakness of their strongest-failing
+baseline, and curated benchmarks systematically understate field
+difficulty in one direction while overstating model limits in the other.
+
+\textbf{Related work, and our delta.} That weak or poorly-tuned
+baselines inflate apparent findings is well documented on the
+\emph{positive} side: metric-learning gains that disappear under fair
+comparison (Musgrave et al., \emph{A Metric Learning Reality Check},
+2020), recommender progress that does not survive tuned baselines
+\citep{dacrema2019}, and rank instability across configurations
+\citep{dehghani2021, bouthillier2021}. That curated benchmarks diverge
+from deployment is the dataset-bias and distribution-shift program
+\citep{torralba2011, koh2021, hendrycks2021}. Our contribution is the
+\textbf{negative-side analogue and its asymmetry.} A
+limitation/impossibility claim inherits the weakness of its
+strongest-\emph{failing} baseline exactly as a positive claim inherits
+its weakest-\emph{tuned} one. But the community has standard
+instrumentation for the positive case (strong baselines, ablations) and
+almost none for the negative, and, more sharply, a
+\emph{self-verification discipline calibrated to catch rigged wins is
+structurally blind to over-claimed losses} (§4d). Two nearest neighbors
+deserve explicit distinction. \textbf{McGreivy \& Hakim (2024,
+\emph{Nat. Mach. Intell.} 6:1256--1269)} find that 79\% of ML-for-PDE
+papers claiming to beat standard solvers compared against weak
+baselines, with widespread under-reporting of negatives. That is the
+closest positive-side analogue. Our delta is the \emph{negative-claim}
+direction and the representation-invariance instrument that
+operationalizes it. And on \emph{this exact task}, \citet{kuznetsov2026}
+reach the \emph{opposite} verdict, that AI tools cannot safely identify
+wild mushrooms (the best they tested still failed ≈15\% of real-world
+cases, none consistently correct), but from deployed, often weak or
+black-box systems. Our results re-examine that conclusion and locate the
+failure in the deployed model, not an information limit, which is
+precisely the distinction this paper exists to draw. We make this
+concrete with \textbf{six case studies across five biological groups}
+(§3--§3.2), three of them re-examinations of externally-published
+``look-alike'' claims, a checklist (§5), and a symmetric
+``negative-claim red-team'' protocol (§5.1). We do not claim a measured
+base rate of false limits in the literature; establishing one is future
+work.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2. The investigation, as we built and believed
+it}\label{the-investigation-as-we-built-and-believed-it}
+
+The task. A frozen image encoder over real GBIF photographs of edible
+species (chanterelle, field mushroom \emph{Agaricus campestris}, morel)
+and poisonous ones (jack-o'-lantern, the Destroying Angel \emph{Amanita
+bisporigera}, the open-set Death Cap \emph{A. phalloides}), reduced to a
+one-step decision in \{eat, abstain\} with a deliberately asymmetric
+cost: eating an edible is a meal, eating a poison is death.
+
+The headline result \emph{as we found it.} On real I-JEPA (ViT-H/14,
+mean-pooled) latents, the lethal pair was ``separable'' (AUROC 0.94),
+and it did not matter: the actual eat decision cleared \textbf{7 of 81}
+held-out Destroying Angels (8.6\% on the split, \textasciitilde4.9\% ±
+2.5\% over 20 splits), and \emph{no abstention tuning removed them} (7
+eaten at every confidence threshold). The cleared specimens were
+confidently-wrong consensus: low predicted risk, low ensemble
+disagreement, on-manifold. A 0.94 aggregate AUROC coexisting with a
+deadly residual the safety machinery could not catch: the ``94\% → liver
+failure'' phenomenon on a real mushroom.
+
+The sweep. We then pushed \textasciitilde18 methods at the residual:
+more data, fine-grained metric learning, resampling, the full
+f-divergence/optimal-transport family, generative and diffusion
+augmentation, metadata fusion, conformal prediction, hierarchical
+planning, active-inference exploration, persistent homology, 3D
+reconstruction, Morse-theoretic shape analysis, and macro↔micro
+generative modeling. Each was run with fair baselines; the most
+important claims also with adversarial verification. None removed the
+residual. Decision-curve analysis showed that at the field-standard
+lethal cost ratio (FungiCLEF \texttt{c\_PSC\ =\ 100}) no operating point
+beat ``eat nothing.'' A frontier VLM refused every deadly specimen, but,
+we argued, from world knowledge of famous species, not from overcoming
+the underlying limit.
+
+The theory. We formalized the negative (Appendix A): a
+\emph{coincidence/divergence floor} (where two class-conditional feature
+distributions coincide, every f-divergence and Wasserstein vanish and
+Bayes error is the prior), a \emph{data-processing bound} (any function
+of the photo, whether a sharper representation, a generated image, an
+upscale, or a topological summary, is bounded by the photo's Bayes
+floor), and an \emph{independence condition} (only a channel with
+information about edibility \emph{beyond} the photo can help). These
+say: if the discriminating feature is not in the image, no method
+recovers it.
+
+The discipline. Twice during this work we produced a result that
+\emph{looked} like a method win and was not: a hierarchical-planning
+improvement that adversarial-verification panels decomposed as a rigged
+baseline and an objective swap. We caught both, reported them, and
+adopted adversarial verification as our standing practice. We were, we
+believed, being unusually careful.
+
+\textbf{This is the paper we were ready to submit.} It is reproduced,
+essentially intact, as the companion document; we preserve it
+deliberately as the specimen.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3. The refutation}\label{the-refutation}
+
+Preparing for review, a referee-style objection was obvious: \emph{the
+backbone is a frozen, mean-pooled I-JEPA; did you try a stronger
+representation?} We had, in fact, shown that fine-tuning a domain
+encoder helped \emph{in-category}, but we had filed that under ``ceiling
+up, floor stays'' and not pursued frozen alternatives. So we ran the
+sweep we should have run first.
+
+\textbf{Five real pairs × three strong frozen encoders.} We assembled
+five genuine field-confusion edible/deadly pairs
+(field-mushroom/Destroying-Angel, chanterelle/jack-o'-lantern,
+morel/false-morel, oyster/jack-o'- lantern, puffball/death-cap-button)
+and encoded each with three paradigmatically different strong frozen
+encoders: masked-latent \textbf{I-JEPA} \citep{assran2023} (ViT-H/14),
+self-distilled \textbf{DINOv2} \citep{oquab2024} (ViT-L/14), and
+contrastive \textbf{CLIP} \citep{radford2021} (ViT-L/14). Per cell, the
+actual false-eat at 80\% edible-yield, 10 seeds.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+mean over 5 pairs
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+I-JEPA-H14
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+DINOv2-L
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+CLIP-L
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+false-eat at 80\% & 1.3\% (95\% UCB 2.2\%, n=720) & 0.1\% (95\% UCB
+0.4\%, n=720) & 0.0\% (95\% UCB 0.4\%, n=720) \\
+open-set eaten & 27\% & 0\% & 3\% \\
+\end{longtable}
+}
+
+\emph{Bounds are one-sided 95\% Clopper-Pearson on the false-eat rate.
+\texttt{n=720} is the five pairs \textbf{pooled}, with
+\textasciitilde150 unique held-out poison specimens per pair (the
+per-seed 30\% test split over }all available images\emph{, \textbf{not}
+seed-multiplied; the 10 seeds reshuffle the same pool). The strong
+encoders are \textbf{near-zero but not exactly zero}: DINOv2's pooled
+estimate is 0.1\% (its Agaricus/Destroying-Angel cell alone reads
+0.3\%), CLIP's 0.0\%, both with pooled upper bound ≈0.4\%. At the
+original ≈60-specimen-per-cell sampling these same cells read a bare
+``0.0\%'' with a ≈4.9\% per-cell upper bound that }overlapped* the
+original \textasciitilde4.9\% ± 2.5\% residual (§2). That is, the exact
+zero was itself an undersampling artifact, the very effect this paper
+warns against (§4). The encoder gap is unchanged: weak I-JEPA's pooled
+false-eat is 1.3\% (UCB 2.2\%), an order of magnitude above the strong
+encoders.*
+
+The residual did not persist across encoders. \textbf{DINOv2 and CLIP
+drove the in-distribution false-eat to near zero: DINOv2 ≤0.3\% on every
+one of the five pairs (pooled 0.1\%, UCB 0.4\%), CLIP ≤0.1\%.} On the
+\emph{identical} Agaricus-vs-Destroying-Angel task where I-JEPA leaves
+3.5\%, DINOv2 leaves 0.3\% (UCB 2.0\%). A center-crop confound test
+(background removed) left DINOv2 essentially unchanged (≤0.2\% per cell,
+pooled 95\% UCB 0.4\%), so it was reading the fungus, not the habitat.
+
+\textbf{Field degradation.} We tested whether the curated success
+survives the regime where foraging deaths occur: downsample, blur,
+\textbf{occlude the bottom third} (the un-excavated base, the single
+most common field failure, which removes the volva), and color-jitter
+the genuine lookalike pairs. DINOv2 held at \textbf{0.0--0.7\%} (95\%
+UCB ≤3.1\%, n=150/cell); a lookalike open-set of novel white toxins
+(n=1151) was eaten 0\% (95\% UCB 0.5\%).
+
+\textbf{The decisive test (the hardest pairs we could find).} The above
+pairs are separable when photographed well. A fair test of an
+\emph{information} limit needs the cases mycologists call genuinely
+undecidable from a photo. We freshly scraped the textbook
+``requires-a-microscope'' confusions and tested them with the easy pair
+as a positive control:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+pair (10-seed AUROC / false-eat at 80)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+I-JEPA
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+DINOv2
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+CLIP
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+{[}control{]} Agaricus / Destroying-Angel & 0.97 / 3.5\% & 1.00 / 0.3\%
+(95\% UCB 2.0\%, n=150) & 1.00 / 0.1\% (95\% UCB 2.0\%, n=150) \\
+\textbf{honey-mushroom / deadly \emph{Galerina}} (most fatal real
+confusion) & 0.97 / 3.5\% & \textbf{1.00 / 0.0\% (95\% UCB 2.0\%,
+n=150)} & 1.00 / 0.1\% (95\% UCB 2.0\%, n=150) \\
+\textbf{woodtuft / deadly \emph{Galerina}} (``separable only by spore
+ornamentation'') & 0.95 / 4.8\% & \textbf{0.98 / 0.7\% (95\% UCB 3.1\%,
+n=150)} & 0.98 / 1.9\% (95\% UCB 5.1\%, n=150) \\
+honey-mushroom / sulphur-tuft & 0.88 / 21.3\% & 1.00 / 0.4\% (95\% UCB
+2.5\%, n=120) & 0.98 / 1.4\% (95\% UCB 5.2\%, n=120) \\
+puffball / earthball & 0.98 / 2.1\% & 1.00 / 0.0\% (95\% UCB 2.5\%,
+n=120) & 1.00 / 0.4\% (95\% UCB 2.5\%, n=120) \\
+\end{longtable}
+}
+
+\emph{Bounds are one-sided 95\% Clopper-Pearson on the false-eat rate;
+\texttt{n} is the number of \textbf{unique held-out poison specimens}
+(the per-seed 30\% test split over }all available images\emph{,
+\textbf{not} seed-multiplied). \texttt{n} differs by row because the
+species differ in image count: the control and both }Galerina* rows have
+\texttt{n=150}, the sulphur-tuft and earthball rows \texttt{n=120}. Two
+cells (honey/\emph{Galerina} and puffball/earthball, DINOv2) hold at an
+exact 0 of 150/120; the rest are \textbf{small but nonzero} (DINOv2
+0.3--0.7\%, CLIP 0.1--1.9\%). At the original ≈60--90-specimen sampling
+several of these read a bare ``0.0\%'', so the higher-powered re-run
+shows those zeros were undersampling artifacts. The weak I-JEPA
+baseline's one-sided 95\% upper bounds run 6.3--28.8\%. Point estimates
+are the full-image re-run; the encoder-dependence conclusion is
+unchanged.*
+
+DINOv2 performed nearly perfectly on the pairs we selected
+\emph{because} they are supposed to be undecidable from a photo. A
+substrate-stripping crop (the one plausible reprieve, since
+\emph{Armillaria} on living hardwood vs \emph{Galerina} on conifer logs
+is a habitat cue) left DINOv2 low (\textbf{0.0--1.0\%}, 95\% UCB
+≤4.1\%), while the \emph{weak} I-JEPA stayed high and degraded further
+on the canonical pair (honey/\emph{Galerina} 3.5→4.1\%). This confirmed
+that the weak encoder relied on contextual cues that the strong encoder
+did not require. \emph{(All sub-tests above, namely field degradation,
+±background crop, and substrate-strip crop, were re-run on all available
+images, matching the two main pair tables. DINOv2's false-eat stays
+≤1.0\% per cell across every regime, CLIP ≤3.8\% (only under the
+substrate-strip crop).)}
+
+\textbf{Across three regimes (curated pairs (± background crop), field
+degradation with base occlusion, and open-set) spanning nine lethal
+pairs, all re-run on every available image, the strong encoder held the
+false-eat to ≤1.0\% (DINOv2; ≤0.7\% un-cropped, curated-pooled 95\% UCB
+0.4\%) and ≤3.8\% (CLIP, under substrate-strip crop) where the weak
+encoder left 0.1--21.3\%, lower within every pair.} The curated GBIF
+pairs are the benchmark regime; the field-degraded, base-occluded, and
+open-set results are the harder regime where deaths occur, and the
+worst-case individual specimen (§6) remains untested. The decisive logic
+is not the absolute rate (the strong-encoder cells are near-zero, not
+exact zeros) but its \emph{encoder-dependence}: an information limit
+binds the photograph, hence every encoder equally, so DINOv2 beating
+I-JEPA \emph{within every pair} is incompatible with one. The
+\textasciitilde5\% ``information-limited residual'' the original paper
+was built on tracked the backbone, not the photo.
+
+\subsubsection{3.1 A second case, to test whether the failure is
+mushroom-specific}\label{a-second-case-to-test-whether-the-failure-is-mushroom-specific}
+
+A single self-refutation invites the obvious objection: perhaps
+mushrooms are special, or our weak encoder was uniquely ill-suited to
+them. So we ran the identical protocol on a \emph{second, independent
+lethal decision in a different kingdom}: the deadliest look-alike
+confusions in the carrot family (Apiaceae). These are \textbf{poison
+hemlock} (\emph{Conium maculatum}, the plant that killed Socrates) and
+\textbf{water hemlock} (\emph{Cicuta maculata}, the most violently toxic
+plant in North America) against edible \textbf{wild carrot / Queen
+Anne's lace} (\emph{Daucus carota}) and \textbf{cow parsley}
+(\emph{Anthriscus sylvestris}), a confusion that kills foragers every
+year. Fresh GBIF scrape, same three encoders, same eval, same
+Clopper-Pearson bounds (n = 90 held-out poison specimens per pair):
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+pair (10-seed AUROC / false-eat at 80, 95\% UCB)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+I-JEPA
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+DINOv2
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+CLIP
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+poison-hemlock / wild-carrot & 0.93 / \textbf{9.0\%} (≤15.5\%) & 1.00 /
+0.2\% (≤3.3\%) & 0.99 / 0.2\% (≤3.3\%) \\
+water-hemlock / wild-carrot & 0.96 / \textbf{5.8\%} (≤11.3\%) & 1.00 /
+0.0\% (≤3.3\%) & 1.00 / 0.2\% (≤3.3\%) \\
+poison-hemlock / cow-parsley & 0.90 / \textbf{16.2\%} (≤24.5\%) & 0.99 /
+0.8\% (≤5.2\%) & 0.98 / 1.4\% (≤5.2\%) \\
+\end{longtable}
+}
+
+The pattern reproduces, more clearly than in mushrooms. The weak encoder
+leaves a \textbf{measured 5.8--16.2\% false-eat} (a residual that,
+reported alone, would read as a substantial information limit on a
+deadly decision), and a stronger frozen encoder reduces it to 0--0.8\%
+within every pair (the I-JEPA intervals, ≤11--24\%, do not overlap the
+DINOv2 point estimates). The representation-invariance test (§5.1, item
+2) flags both domains identically: a limit one encoder sees and another
+does not is a property of the encoder, not the photograph. The failure
+is \textbf{not mushroom-specific}; it is a generic hazard of anchoring a
+safety-negative on a weak representation. (Both these cases are our own
+constructions; §3.2 takes the next step and re-examines three
+\emph{externally published} indistinguishability claims.)
+
+\subsubsection{3.2 The same protocol across five biological groups:
+three external
+claims}\label{the-same-protocol-across-five-biological-groups-three-external-claims}
+
+To test the failure mode at scale, we ran the identical three-encoder
+protocol on a battery of well-known lethal look-alike confusions
+spanning five biological groups, \textbf{three of them anchored to
+externally-published claims of visual indistinguishability}, so the
+``limit'' is not one we authored:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+case (group)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+external ``look-alike'' claim
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+I-JEPA false-safe at 80\%
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+DINOv2
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+mushrooms (fungi) & none (this work) & 0.1--21.3\% & 0--0.7\% \\
+hemlock / wild carrot (plants) & none (this work) & 5.8--16.2\% &
+0--0.8\% \\
+coral snake / kingsnake (reptiles) & \citep{pfennig2001} & 4.2--22.4\% &
+\textbf{0.0\%} \\
+brown recluse / house spider (arachnids) & \citep{vetter2000} &
+10.3--\textbf{48.9\%} & 0--2.0\% \\
+poison-frog mimic / model (amphibians) & \citep{symula2001} &
+12.7--\textbf{43.3\%} & 0.3--10.0\% \\
+deadly berries (plant fruit) & none (foraging literature) & 0.2--19.9\%
+& \textbf{0.0\%} \\
+\end{longtable}
+}
+
+\emph{(Full per-pair tables with Clopper-Pearson bounds in Appendix C.
+Per our own no-bare-zeros rule (§5.1, item 5), the DINOv2 ``0.0\%''
+entries are 0 observed of ≈90 held-out poison specimens per pair. Each
+is a one-sided 95\% upper bound ≤3.3\%, not exact zeros. The amphibian
+row is small-n, see below.)} The pattern holds across all six groups:
+the weak encoder leaves a large, measured false-safe rate, frequently
+\textbf{near-chance} (the recluse / house-spider and the
+\emph{fantastica} / \emph{imitator} pairs reach AUROC 0.73 and 0.72,
+clearing roughly half of the dangerous specimens), and a stronger frozen
+encoder lowers it within every pair, to near-zero in every group but the
+small-sample poison frogs (qualifier iii). A reviewer shown only the
+I-JEPA column would reasonably conclude that several of these decisions
+sit at an information limit. For the three external rows, the literature
+says exactly that: coral snakes and their mimics are
+``near-indistinguishable'' \citep{pfennig2001}, brown recluses are
+massively over-reported because non-experts cannot tell them from
+harmless house spiders \citep{vetter2000}, poison-frog mimics co-evolved
+to be visually identical to their models \citep{symula2001}. None of
+these external indistinguishability claims binds a strong frozen
+encoder.
+
+Three honest qualifiers. (i) These are species distributions on (often
+whole-organism) GBIF photographs, so they test \emph{species
+separability}, not the isolated diagnostic confusion a forager faces
+with a single berry cluster or a partial specimen. The field and
+worst-case caveats of §6 apply unchanged. (ii) The pattern is
+\textbf{not universal} (the bilberry / deadly-nightshade pair is easy
+even for the weak encoder (0.2\%)), and that is the point: the
+encoder-dependence appears precisely where a weak baseline \emph{would}
+have been read as a limit, and is absent where it would not. The
+representation-invariance test (§5.1, item 2) separates the two
+automatically. (iii) The poison frogs are the one group where the
+strong-encoder advantage, though present in every pair point-wise, is
+\textbf{not yet statistically decisive}: the mimic/model species are
+photograph-poor, giving only n=22--30 held-out specimens on three of the
+four pairs (DINOv2 up to 10.0\%, upper bound ≤25.9\%), so only the n=90
+\emph{Allobates} / \emph{Ameerega bilinguis} pair is conclusive. We
+report the frog case as suggestive, not confirmatory (per-pair bounds in
+Appendix C.1).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{4. Anatomy of the error}\label{anatomy-of-the-error}
+
+How did a careful, reproduced, adversarially-verified investigation
+produce and defend a false limit? Four compounding causes, each general.
+
+\textbf{(a) The baseline was weak, and a negative inherits its
+baseline.} A claim that ``no method beats error ε'' is exactly as strong
+as the \emph{best} method that fails to. We used frozen mean-pooled
+I-JEPA for principled reasons (sovereignty, a fixed feature space for
+the divergence-floor proof) and never asked whether it was \emph{strong
+enough to anchor a negative}. It was not. Under a stronger frozen
+encoder the same residual was an order of magnitude smaller (near zero,
+≤0.7\% per cell): it was a property of the backbone, not the photograph.
+An ablation (\texttt{ablation\_agg.py}) isolates the cause, and finds
+that the baseline was weak in \emph{two} ways at once. First, the
+pretraining objective: replacing I-JEPA's mean-pool with max-pool does
+not rescue it (both stay near-chance, 51\% and 56\% false-safe on the
+recluse pair), so I-JEPA's masked-latent features are weak for this
+discrimination regardless of how they are pooled. Second, the
+aggregation is independently lossy: mean-pooling DINOv2's patch tokens
+rather than using its CLS embedding degrades that same hard pair from
+2.1\% to 25.7\% (max-pool recovers most, 5.5\%). Our original baseline
+combined both handicaps, and we checked neither.
+
+\textbf{(b) Curated data was mistaken for the field.} GBIF
+research-grade photographs are \emph{selected to show the diagnostic
+features}. A model that scores \textasciitilde0 on them has learned that
+the species differ, which they do, in photographable ways, even for
+``microscope'' pairs (the microscope is needed for \emph{certain}
+identification, not for a good \emph{probabilistic} guess). We treated
+benchmark separability as a proxy for field decidability. It runs the
+other way: curated benchmarks understate field difficulty and overstate
+the model's limits at once.
+
+\textbf{(c) The theory was true but empirically vacuous.} Our formal
+floor and data-processing propositions are correct: \emph{if} the photo
+lacks the discriminating information, no function of it recovers it. We
+never verified the antecedent. For every real lethal pair we could
+obtain, the antecedent is false at the distribution level: the photo
+\emph{does} carry enough signal, so the propositions, while valid, said
+nothing about these pairs. A true theorem with an unverified antecedent
+is not evidence.
+
+\textbf{(d) Adversarial verification checked the wrong axis.} Our
+verification panels were genuinely effective: they reproduced every
+number and caught two rigged \emph{positive} results. But they audited
+\emph{correctness} (do the numbers reproduce?) and \emph{self-deception
+toward positives} (is this win rigged?). They never asked the question
+that mattered for a \emph{negative}: \emph{is the baseline strong enough
+that its failure is informative?} A verification discipline tuned to
+catch over-claimed wins is blind to over-claimed losses.
+
+The unifying point is that we instrumented heavily against finding a
+false positive and not at all against asserting a false negative. That
+asymmetry is the central lesson. We establish it from six case studies
+across five biological groups (three re-examining externally-published
+indistinguishability claims). This is an existence proof and a protocol,
+not a measured base rate over the literature; how often published limit
+claims are refuted by the strong-baseline test is the question §5.1
+operationalizes.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{5. A checklist for safety-negative
+claims}\label{a-checklist-for-safety-negative-claims}
+
+From the post-mortem, the stress tests a limitation/impossibility claim
+should pass before it is trusted:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Strong-baseline floor.} Re-run the negative against the
+  \emph{strongest reasonable} baseline, not the most principled or
+  convenient one. A residual that vanishes under a stronger backbone was
+  never a limit. Report the strongest baseline that \emph{fails}, and
+  treat the claim as bounded by it.
+\item
+  \textbf{Antecedent verification.} If the negative rests on a theorem
+  (``no function of X helps''), test that the theorem's antecedent (``X
+  lacks the information'') actually holds on the data, empirically. Do
+  not assume it.
+\item
+  \textbf{Hard-data, not curated-proxy.} Stress the claim on the
+  genuinely-difficult regime it concerns (here: field degradation,
+  occlusion, the expert-acknowledged-undecidable cases), scraped fresh,
+  not on the curated benchmark, which is selected against difficulty.
+\item
+  \textbf{Symmetric verification.} If adversarial verification is used,
+  give it a lens aimed at the negative: \emph{is this loss real, or an
+  artifact of a weak setup?} That is not only \emph{is this win rigged?}
+\item
+  \textbf{Benchmark ≠ field.} State explicitly what the benchmark number
+  does and does not bound. Separability on curated data bounds nothing
+  about field safety, in either direction.
+\end{enumerate}
+
+\subsubsection{5.1 The negative-claim red-team (the lens our
+verification
+lacked)}\label{the-negative-claim-red-team-the-lens-our-verification-lacked}
+
+Our adversarial-verification panels were effective against rigged
+\emph{positives} and useless against an over-claimed \emph{negative},
+because they never asked the negative-specific questions. We distill
+those into a red-team a verification process should run against any
+limitation/impossibility claim before it is trusted. Applied to our own
+original paper, this is the protocol that would have refuted it in an
+afternoon:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Strongest-baseline, not principled-baseline.} Name the single
+  strongest method that could plausibly beat the claim; if the
+  negative's baseline was chosen for principle or convenience (ours: a
+  frozen, mean-pooled encoder for a clean proof), \emph{replace it with
+  the strongest available and re-measure.} Bound the claim by the
+  strongest baseline that still fails.
+\item
+  \textbf{Representation-invariance test.} Re-run the claim across ≥2
+  paradigmatically different representations (here: masked-latent,
+  self-distilled, contrastive). An \emph{information} limit must bind
+  all of them; a \emph{representation} artifact will not. A
+  within-instance gap between encoders refutes an information limit
+  \emph{regardless of the absolute error level}. It is the single most
+  diagnostic check, and the one we omitted.
+\item
+  \textbf{Antecedent audit.} If the negative invokes a theorem (``no
+  function of X helps''), \emph{measure} its antecedent (``X lacks the
+  discriminating information'') on the data; do not assume it. A valid
+  theorem with an unverified antecedent is not evidence.
+\item
+  \textbf{Fresh hard-data, not curated proxy.} Test the claim on the
+  genuinely-difficult regime it concerns, scraped fresh for the purpose,
+  not the curated benchmark, which is selected against difficulty.
+\item
+  \textbf{No bare zeros.} Report every ``0 / no-method-helps'' cell with
+  a one-sided upper confidence bound. A 0-of-\texttt{n} is not 0; under
+  an asymmetric cost the difference between ``0\%'' and ``≤5\% with 95\%
+  confidence'' can flip the conclusion.
+\item
+  \textbf{Cost-honest conclusion.} Re-state the conclusion against the
+  \emph{upper} bound under the task's real loss: does the negative still
+  hold if the true rate sits at the top of its confidence interval?
+\end{enumerate}
+
+The diagnostic asymmetry is item 2: a representation-invariance test is
+inexpensive and conclusive, and was the one check the original
+investigation never performed.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{6. What remains true (and the real safety
+point)}\label{what-remains-true-and-the-real-safety-point}
+
+The collapse of the information-limit thesis is not a safety
+endorsement, and the corrected picture is itself a safety argument, just
+a different one.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Strong encoders separate these species' \emph{distributions}
+  very well; this does not make foraging safe.} Three concerns survive
+  untouched: \emph{open-set true novelty} (a toxic species the model
+  never saw), the \emph{cost asymmetry} (under \texttt{c\_PSC\ =\ 100},
+  even a tiny tail false-eat can fail the decision-curve test), and the
+  \emph{worst-case individual specimen} (the single \emph{Galerina}
+  photographed at the moment it is truly identical to an
+  \emph{Armillaria}, or an isolated button-stage \emph{Amanita} egg),
+  which a random-sample 0\% cannot bound and which we could not obtain
+  life-stage-filtered data to test. At full sampling the strong encoders
+  cleared only a small fraction of held-out poisons (DINOv2 ≤0.7\% per
+  cell, pooled 95\% UCB 0.4\%): low, but no longer a clean zero, and a
+  random-sample rate this low still cannot bound the worst-case specimen
+  above. Absence of a measured tail in a curated sample is not a field
+  guarantee.
+\item
+  \textbf{The danger shifts from ``the model can't'' to ``the model is
+  trusted because it can.''} A model that performs well even the
+  microscope pairs invites exactly the over-trust the app-safety
+  literature documents (higher confidence in AI \emph{reduces} correct
+  decisions in high-risk identification). A near-perfect benchmark score
+  is a \emph{reason for more caution}, not less, for a lethal decision.
+\item
+  \textbf{The formal propositions remain valid} as a statement about
+  genuinely information-poor observations. They simply do not apply to
+  the real lethal pairs we tested. They would apply to the worst-case
+  corner above, which is the honest residual of the original thesis:
+  narrow, real, and undemonstrated.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{7. Conclusion}\label{conclusion}
+
+We built a careful, reproduced, adversarially-verified case that a
+lethal recognition task is information-limited, and we were wrong: the
+limit was a weak-baseline artifact. A stronger frozen encoder beat the
+weak one \emph{within every pair}, which an information limit forbids,
+across curated, field-degraded, and open-set regimes including the
+textbook-undecidable pairs, and then again across six lethal look-alike
+decisions in five biological groups, three of them re-examining
+externally-published ``near-indistinguishable'' claims that a strong
+encoder violates. We report the sequence because the failure is general:
+a limitation claim is only as strong as the baseline that fails to beat
+it, curated benchmarks understate field difficulty while overstating
+model limits, and a verification discipline built to catch false
+positives will miss false negatives. The contribution is methodological
+rather than mycological: a worked demonstration, including its own
+collapse, that safety-\emph{negative} claims demand the same adversarial
+stress as safety-positive ones, with a checklist for supplying it.
+\emph{Research vehicle, never a forager. When in doubt, DON'T EAT.}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Appendix A: Formal statements (true, and empirically vacuous
+for the real
+pairs)}\label{appendix-a-formal-statements-true-and-empirically-vacuous-for-the-real-pairs}
+
+These are the propositions the original investigation used to
+\emph{explain} the limit. They are correct. The finding of §4(c) is that
+their antecedent, ``the photograph lacks the discriminating
+information'', is \textbf{false} for every real lethal pair we could
+obtain (§3), so the propositions, though valid, bound nothing about
+those pairs. We state them precisely both because they are the only
+durable formal content and because seeing the antecedent explicitly
+makes the vacuity clear.
+
+\textbf{Setup.} Let \(X\) be the photograph on space \(\mathcal{X}\),
+\(Y \in \{0,1\}\) the edibility label (\(0=\) edible, \(1=\) deadly),
+and \(\varphi : \mathcal{X} \to \mathbb{R}^d\) a fixed feature map (the
+encoder). Write the class-conditional feature laws
+\(P_0 = \mathrm{Law}(\varphi(X)\mid Y{=}0)\) and
+\(P_1 = \mathrm{Law}(\varphi(X)\mid Y{=}1)\), the posterior
+\(\eta(z) = P(Y{=}1 \mid \varphi(X){=}z)\), and the prior
+\(\pi = P(Y{=}1)\). A decision rule is a measurable
+\(g : \mathbb{R}^d \to \{\text{eat},\text{abstain}\}\); the
+\textbf{false-eat} rate is
+\(\mathrm{FE}(g) = P(g{=}\text{eat}\mid Y{=}1)\) and the \textbf{yield}
+is \(\mathrm{Yld}(g) = P(g{=}\text{eat}\mid Y{=}0)\). All three
+statements concern a \emph{fixed} modality \(X\) (a single RGB
+photograph).
+
+\textbf{Proposition 1 (Coincidence / divergence floor).} Fix a target
+yield \(\alpha\). Among rules with yield \(\ge \alpha\), the minimum
+false-eat is the Bayes value \(\mathrm{FE}^*(\alpha)\), attained by
+thresholding the likelihood ratio \(dP_1/dP_0\) (Neyman--Pearson). On
+any region \(R\) where \(P_0 = P_1\): (i) every \(f\)-divergence and
+every Wasserstein distance between \(P_0|_R\) and \(P_1|_R\) is \(0\);
+(ii) \(dP_1/dP_0 = 1\), \(\eta \equiv \pi\), and
+\(I(\varphi(X); Y \mid \varphi(X) \in R) = 0\); (iii) no rule separates
+the classes on \(R\), so any rule clears poisons and edibles in equal
+proportion there. \emph{Proof.} Each \(f\)-divergence and each \(W_p\)
+vanishes iff the measures coincide; \(dP_1/dP_0 = 1\) gives
+\(\eta = \pi\) by Bayes, and \(I = 0\) by conditional independence; with
+\(\eta\) constant on \(R\) the Neyman--Pearson statistic is constant
+there. \(\blacksquare\)
+
+\textbf{Proposition 2 (Data-processing bound on post-hoc methods).} Let
+\(Z = g(X)\) be \emph{any} measurable transform of the photograph: a
+different representation, a generated or upscaled image, a topological
+summary, a \emph{predicted} microscopy. Then \(Y \to X \to Z\) is a
+Markov chain, so \(I(Z;Y) \le I(X;Y)\), and for every yield \(\alpha\),
+\(\mathrm{FE}^*_Z(\alpha) \ge \mathrm{FE}^*_X(\alpha)\): no function of
+the photograph beats the photograph's own Bayes floor. \emph{Proof.} The
+data-processing inequality, plus monotonicity of the constrained Bayes
+risk in the decision \(\sigma\)-algebra
+(\(\sigma(Z) \subseteq \sigma(X)\)). \(\blacksquare\)
+
+\textbf{Proposition 3 (When an extra channel helps: the independence
+condition).} For corroboration rules (eat only when both \(X\) and an
+auxiliary \(W\) clear), \(W\) lowers the false-eat below
+\(\mathrm{FE}^*_X(\alpha)\) \textbf{iff} \(I(W; Y \mid X) > 0\). (i) A
+redundant channel \(W = h(X, \xi)\) with \(\xi \perp\!\!\!\perp Y\) has
+\(I(W;Y\mid X)=0\) and cannot help. (ii) An independent channel
+\(W \perp\!\!\!\perp X \mid Y\) with per-class reliability \(\rho\)
+multiplies the false-eat by \((1-\rho)\), at a yield cost. \emph{Proof.}
+If \(W \perp\!\!\!\perp X \mid Y\), then \(\mathrm{FE}\) factors as
+\(\mathrm{FE}^*_X(\alpha)\cdot(1-\rho)\); if \(I(W;Y\mid X)=0\), then
+\(g_W\) is conditionally independent of \(Y\) given
+\(\{g_X{=}\text{eat}\}\), leaving \(\mathrm{FE}\) unchanged.
+\(\blacksquare\)
+
+\textbf{The vacuity, stated plainly.} Propositions 1--3 are conditional:
+\emph{if} a coincidence region of nonzero mass exists for a real lethal
+pair, \emph{then} no method escapes it. Section 3 measured
+\(\mathrm{FE}^*_X\) directly with a strong encoder and found it near
+zero (\(\le 0.7\%\) per cell; pooled 95\% UCB \(0.4\%\)) across every
+pair tested, including the textbook-undecidable ones. The coincidence
+region of Proposition 1 therefore has at most negligible mass for these
+pairs, and the precondition for Proposition 2 to bind (a large
+\(\mathrm{FE}^*_X\)) does not hold. The theory is intact; it does not
+describe the regime these pairs occupy. It would describe the worst-case
+corner of Section 6 (a single genuinely-coincident specimen), which
+remains undemonstrated for lack of life-stage-filtered data.
+
+\subsection{Appendix B: The original
+investigation}\label{appendix-b-the-original-investigation}
+
+Preserved verbatim as the companion document (\texttt{MANUSCRIPT.md}):
+the \textasciitilde18-method sweep, the decision-curve and conformal
+apparatus, the VLM analysis, and the two self-caught rigged positives.
+It is the specimen this paper dissects, not an endorsed result.
+
+\subsection{Appendix C:
+Reproducibility}\label{appendix-c-reproducibility}
+
+All experiments are runnable in
+\texttt{\textasciitilde{}/Documents/EatThisMushroom/}. The refutation:
+\texttt{pairs\_encoders.py} (five pairs × three encoders, ±crop),
+\texttt{hard\_regime.py} (field degradation + base occlusion + lookalike
+open-set), \texttt{scrape\_hard.py} + \texttt{hard\_pairs.py} (the
+needs-a-microscope pairs, ±substrate-strip crop). The two tables in §3
+are the \textbf{full-image} re-run (\texttt{FULL=1}, which uses every
+cached image and writes a separate \texttt{\_\_full} feature cache,
+preserving the original 200/300-image arrays); both scripts print, per
+cell, the number of unique held-out poison test specimens and a
+one-sided 95\% Clopper-Pearson upper bound on the false-eat rate. The
+second case study (§3.1): \texttt{scrape\_plants.py} (the deadly
+Apiaceae) + \texttt{case2\_plants.py}. The §3.2 multi-taxon battery:
+\texttt{scrape\_snakes.py} + \texttt{case3\_snakes.py} (coral-snake
+mimicry), \texttt{scrape\_more.py} + \texttt{case4\_spiders.py}
+(brown-recluse misID) and \texttt{case5\_frogs.py} (poison-frog
+mimicry), \texttt{scrape\_berries.py} + \texttt{case6\_berries.py}
+(deadly berries), each the same three-encoder protocol with
+Clopper-Pearson bounds and a corrupt-image-robust loader. The
+objective-vs-aggregation ablation (§4a): \texttt{ablation\_agg.py},
+which re-encodes three hard pairs keeping patch tokens and compares
+I-JEPA \{mean, max\} against DINOv2 \{CLS, mean, max\}. The original
+investigation: the method-sweep scripts enumerated in the companion
+document. All GBIF image scrapes are reproducible via the
+\texttt{species/match} + \texttt{occurrence/search} endpoints in the
+\texttt{scrape\_*.py} files.
+
+\subsubsection{Appendix C.1: Per-pair tables for the §3.2
+battery}\label{appendix-c.1-per-pair-tables-for-the-3.2-battery}
+
+The §3.2 summary collapses each case to a range; the full per-pair
+results follow (10-seed AUROC / dangerous-cleared at 80\% edible-yield,
+with one-sided 95\% Clopper-Pearson upper bound; \texttt{n} = unique
+dangerous test specimens per seed, not seed-multiplied). The
+``dangerous-cleared'' event is the venomous/toxic/model specimen cleared
+as the harmless look-alike at the 80\%-yield threshold.
+
+\textbf{Case 3: coral-snake mimicry (reptiles; \citep{pfennig2001}),
+n=90:}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+pair
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+I-JEPA
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+DINOv2
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+CLIP
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+coral / scarlet-kingsnake & 0.89 / 13.8\% (≤20.7\%) & 1.00 / 0.0\%
+(≤3.3\%) & 0.98 / 0.7\% (≤5.2\%) \\
+coral / milk-snake & 0.94 / 4.2\% (≤9.9\%) & 1.00 / 0.0\% (≤3.3\%) &
+1.00 / 0.0\% (≤3.3\%) \\
+coral / scarlet-snake & 0.84 / 22.4\% (≤30.6\%) & 1.00 / 0.0\% (≤3.3\%)
+& 1.00 / 0.1\% (≤3.3\%) \\
+\end{longtable}
+}
+
+\textbf{Case 4: brown-recluse misidentification (arachnids; Vetter),
+n=90:}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+pair
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+I-JEPA
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+DINOv2
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+CLIP
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+recluse / southern-house-spider & 0.73 / 48.9\% (≤58.0\%) & 0.98 / 2.0\%
+(≤6.8\%) & 0.88 / 18.9\% (≤27.0\%) \\
+recluse / wolf-spider & 0.93 / 10.3\% (≤16.8\%) & 1.00 / 0.0\% (≤3.3\%)
+& 1.00 / 0.0\% (≤3.3\%) \\
+recluse / hobo-spider & 0.84 / 26.0\% (≤34.2\%) & 1.00 / 0.0\% (≤3.3\%)
+& 0.96 / 4.8\% (≤9.9\%) \\
+\end{longtable}
+}
+
+\textbf{Case 5: poison-frog mimicry (amphibians; \citep{symula2001}
+{[}Müllerian{]}; Darst \& Cummings, \emph{Nature} 2006 {[}Batesian{]}):}
+the mimic/model species have few GBIF photographs, so this case carries
+the smallest test sets and widest bounds (n = 22--90). \emph{Allobates
+zaparo} was topped up from 37 to 66 usable images by taking all media
+per occurrence (GBIF has 37 occurrences but 71 distinct image URLs).
+Reported direction: model / co-mimic cleared as the focal mimic.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+pair
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+n
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+I-JEPA
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+DINOv2
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+CLIP
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Müllerian: \emph{variabilis} / \emph{imitator} & 30 & 0.89 / 18.3\%
+(≤35.7\%) & 0.96 / 4.7\% (≤14.9\%) & 0.93 / 10.3\% (≤23.9\%) \\
+Müllerian: \emph{fantastica} / \emph{imitator} & 30 & 0.72 / 43.3\%
+(≤59.8\%) & 0.99 / 0.3\% (≤9.5\%) & 0.98 / 2.7\% (≤14.9\%) \\
+Batesian: \emph{Allobates} / \emph{Ameerega bilinguis} & 90 & 0.89 /
+12.7\% (≤19.4\%) & 0.99 / 0.7\% (≤5.2\%) & 0.98 / 0.9\% (≤5.2\%) \\
+Batesian: \emph{Allobates} / \emph{Ameerega parvula} & 22 & 0.82 /
+33.6\% (≤51.5\%) & 0.93 / 10.0\% (≤25.9\%) & 0.92 / 16.4\% (≤36.9\%) \\
+\end{longtable}
+}
+
+\textbf{Case 6: deadly berries (plant fruit; foraging literature),
+n=90:}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+pair
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+I-JEPA
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+DINOv2
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+CLIP
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+elderberry / pokeweed & 0.88 / 19.9\% (≤28.2\%) & 1.00 / 0.0\% (≤3.3\%)
+& 0.99 / 0.0\% (≤3.3\%) \\
+wild-grape / moonseed & 0.91 / 10.8\% (≤18.1\%) & 1.00 / 0.0\% (≤3.3\%)
+& 1.00 / 0.3\% (≤3.3\%) \\
+bilberry / deadly-nightshade & 1.00 / 0.2\% (≤3.3\%) & 1.00 / 0.0\%
+(≤3.3\%) & 1.00 / 0.0\% (≤3.3\%) \\
+\end{longtable}
+}
+
+At n=90 a ``0.0\%'' cell upper-bounds at 3.3\%; on the small frog pairs
+a zero cell bounds only at \textasciitilde9.5\% (n=30) to
+\textasciitilde12.7\% (n=22), and DINOv2 itself reaches 10.0\% (≤25.9\%)
+on the n=22 \emph{parvula} pair. The frog case follows the same
+weak→strong ordering in every pair (DINOv2 below I-JEPA point-wise
+throughout), but its bounds are wide enough that only the n=90
+\emph{bilinguis} pair is statistically decisive: read the frog evidence
+as suggestive, not confirmatory. The other four groups (n=90--150) are
+firm.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
