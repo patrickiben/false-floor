@@ -472,7 +472,7 @@ dissects, not an endorsed result.
 
 ## Appendix C: Reproducibility
 
-All experiments are runnable in `~/Documents/EatThisMushroom/`. The refutation: `pairs_encoders.py` (five
+All code and derived feature caches are provided as an anonymized, view-only archive (contributor names hidden): `osf.io/d3ft6/?view_only=a7785622ad2e4e1995f2c830359447b3`. The scripts named below are in its `code/` directory. The refutation: `pairs_encoders.py` (five
 pairs × three encoders, ±crop), `hard_regime.py` (field degradation + base occlusion + lookalike open-set),
 `scrape_hard.py` + `hard_pairs.py` (the needs-a-microscope pairs, ±substrate-strip crop). The two tables in §3
 are the **full-image** re-run (`FULL=1`, which uses every cached image and writes a separate `__full` feature
