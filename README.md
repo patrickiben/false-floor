@@ -19,3 +19,10 @@ A cautionary methods study. An investigation concluded that "should I eat this m
 4. Build the PDF: `cd paper && ./build_tmlr.sh` (needs pandoc + a LaTeX distribution).
 
 Encoders: frozen `facebook/ijepa_vith14_1k`, `facebook/dinov2-large`, `openai/clip-vit-large-patch14` (Hugging Face). MPS/CUDA/CPU auto-selected.
+
+## Verify the statistics
+
+Every false-eat / false-safe rate in the paper is reported with a one-sided 95% Clopper-Pearson upper bound, and the paper's claims live at rates near zero, so the `x=0` boundary of that bound is load-bearing. The from-scratch implementation (`code/cp_bounds.py`, copied inline into each evaluation script) is machine-checked three ways, no image data needed:
+
+- `python code/test_cp_bounds.py` — **property-based** (Hypothesis: range, monotonicity, the `x=0`/`x=n` boundaries, and the defining equation `P(Bin(n,p) <= x) = alpha`) and **differential** (agreement to `< 1e-6` with `scipy.stats.beta.ppf`, `scipy.stats.binomtest`, and `statsmodels` `proportion_confint(method='beta')` on every `(x, n)` cell in the paper). It also confirms the `cp_upper` inlined in the evaluation scripts is behaviourally identical to the canonical one, so the test covers the code that produced the numbers.
+- `python code/verify_cp_symbolic.py` — **symbolic re-derivation** (SymPy proves the Beta-binomial identity the bound rests on, and the `x=0` closed form `1 - alpha^(1/n)`) plus a **30-digit** mpmath cross-check independent of the float bisection.

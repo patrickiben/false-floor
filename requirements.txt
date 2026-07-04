@@ -5,3 +5,7 @@ pillow
 scipy
 gudhi          # topological scripts (companion)
 scikit-image   # lrm_betti
+hypothesis     # property-based verification of the CP bound (test_cp_bounds.py)
+statsmodels    # differential check vs an independent CP implementation (test_cp_bounds.py)
+sympy          # symbolic re-derivation of the Beta-binomial identity (verify_cp_symbolic.py)
+mpmath         # 30-digit cross-check of the CP bound (verify_cp_symbolic.py)
