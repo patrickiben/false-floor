@@ -8,3 +8,7 @@ __pycache__/
 *.blg
 *.out
 .DS_Store
+
+# property-based test cache
+.hypothesis/
+__pycache__/
