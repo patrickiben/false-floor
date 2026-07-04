@@ -32,39 +32,37 @@ difficulty in one direction while overstating model limits in the other.
 \textbf{Related work, and our delta.} That weak or poorly-tuned
 baselines inflate apparent findings is well documented on the
 \emph{positive} side: metric-learning gains that disappear under fair
-comparison (Musgrave et al., \emph{A Metric Learning Reality Check},
-2020), recommender progress that does not survive tuned baselines
-\citep{dacrema2019}, and rank instability across configurations
-\citep{dehghani2021, bouthillier2021}. That curated benchmarks diverge
-from deployment is the dataset-bias and distribution-shift program
-\citep{torralba2011, koh2021, hendrycks2021}. Our contribution is the
-\textbf{negative-side analogue and its asymmetry.} A
-limitation/impossibility claim inherits the weakness of its
-strongest-\emph{failing} baseline exactly as a positive claim inherits
-its weakest-\emph{tuned} one. But the community has standard
+comparison \citep{musgrave2020}, recommender progress that does not
+survive tuned baselines \citep{dacrema2019}, and rank instability across
+configurations \citep{dehghani2021, bouthillier2021}. That curated
+benchmarks diverge from deployment is the dataset-bias and
+distribution-shift program \citep{torralba2011, koh2021, hendrycks2021}.
+Our contribution is the \textbf{negative-side analogue and its
+asymmetry.} A limitation/impossibility claim inherits the weakness of
+its strongest-\emph{failing} baseline exactly as a positive claim
+inherits its weakest-\emph{tuned} one. But the community has standard
 instrumentation for the positive case (strong baselines, ablations) and
 almost none for the negative, and, more sharply, a
 \emph{self-verification discipline calibrated to catch rigged wins is
 structurally blind to over-claimed losses} (§4d). Two nearest neighbors
-deserve explicit distinction. \textbf{McGreivy \& Hakim (2024,
-\emph{Nat. Mach. Intell.} 6:1256--1269)} find that 79\% of ML-for-PDE
-papers claiming to beat standard solvers compared against weak
-baselines, with widespread under-reporting of negatives. That is the
-closest positive-side analogue. Our delta is the \emph{negative-claim}
-direction and the representation-invariance instrument that
-operationalizes it. And on \emph{this exact task}, \citet{kuznetsov2026}
-reach the \emph{opposite} verdict, that AI tools cannot safely identify
-wild mushrooms (the best they tested still failed ≈15\% of real-world
-cases, none consistently correct), but from deployed, often weak or
-black-box systems. Our results re-examine that conclusion and locate the
-failure in the deployed model, not an information limit, which is
-precisely the distinction this paper exists to draw. We make this
-concrete with \textbf{six case studies across five biological groups}
-(§3--§3.2), three of them re-examinations of externally-published
-``look-alike'' claims, a checklist (§5), and a symmetric
-``negative-claim red-team'' protocol (§5.1). We do not claim a measured
-base rate of false limits in the literature; establishing one is future
-work.
+deserve explicit distinction. \citet{mcgreivy2024} find that 79\% of
+ML-for-PDE papers claiming to beat standard solvers compared against
+weak baselines, with widespread under-reporting of negatives. That is
+the closest positive-side analogue. Our delta is the
+\emph{negative-claim} direction and the representation-invariance
+instrument that operationalizes it. And on \emph{this exact task},
+\citet{kuznetsov2026} reach the \emph{opposite} verdict, that AI tools
+cannot safely identify wild mushrooms (the best they tested still failed
+≈15\% of real-world cases, none consistently correct), but from
+deployed, often weak or black-box systems. Our results re-examine that
+conclusion and locate the failure in the deployed model, not an
+information limit, which is precisely the distinction this paper exists
+to draw. We make this concrete with \textbf{six case studies across five
+biological groups} (§3--§3.2), three of them re-examinations of
+externally-published ``look-alike'' claims, a checklist (§5), and a
+symmetric ``negative-claim red-team'' protocol (§5.1). We do not claim a
+measured base rate of false limits in the literature; establishing one
+is future work.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -849,12 +847,12 @@ recluse / hobo-spider & 0.84 / 26.0\% (≤34.2\%) & 1.00 / 0.0\% (≤3.3\%)
 }
 
 \textbf{Case 5: poison-frog mimicry (amphibians; \citep{symula2001}
-{[}Müllerian{]}; Darst \& Cummings, \emph{Nature} 2006 {[}Batesian{]}):}
-the mimic/model species have few GBIF photographs, so this case carries
-the smallest test sets and widest bounds (n = 22--90). \emph{Allobates
-zaparo} was topped up from 37 to 66 usable images by taking all media
-per occurrence (GBIF has 37 occurrences but 71 distinct image URLs).
-Reported direction: model / co-mimic cleared as the focal mimic.
+{[}Müllerian{]}; \citep{darst2006} {[}Batesian{]}):} the mimic/model
+species have few GBIF photographs, so this case carries the smallest
+test sets and widest bounds (n = 22--90). \emph{Allobates zaparo} was
+topped up from 37 to 66 usable images by taking all media per occurrence
+(GBIF has 37 occurrences but 71 distinct image URLs). Reported
+direction: model / co-mimic cleared as the focal mimic.
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}

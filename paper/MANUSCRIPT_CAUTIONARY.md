@@ -571,6 +571,4 @@ Symula, R., Schulte, R. & Summers, K. (2001). Molecular phylogenetic evidence fo
 
 Torralba, A. & Efros, A. A. (2011). Unbiased look at dataset bias. *CVPR.*
 
-Vetter, R. S. (2000). Identifying and misidentifying the brown recluse spider. *Dermatology Online Journal*, 6(1), 7.
-</content>
-</invoke>
+Vetter, R. S. (1999). Identifying and misidentifying the brown recluse spider. *Dermatology Online Journal*, 5(2), 7.
