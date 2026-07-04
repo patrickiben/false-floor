@@ -26,3 +26,11 @@ Every false-eat / false-safe rate in the paper is reported with a one-sided 95% 
 
 - `python code/test_cp_bounds.py` — **property-based** (Hypothesis: range, monotonicity, the `x=0`/`x=n` boundaries, and the defining equation `P(Bin(n,p) <= x) = alpha`) and **differential** (agreement to `< 1e-6` with `scipy.stats.beta.ppf`, `scipy.stats.binomtest`, and `statsmodels` `proportion_confint(method='beta')` on every `(x, n)` cell in the paper). It also confirms the `cp_upper` inlined in the evaluation scripts is behaviourally identical to the canonical one, so the test covers the code that produced the numbers.
 - `python code/verify_cp_symbolic.py` — **symbolic re-derivation** (SymPy proves the Beta-binomial identity the bound rests on, and the `x=0` closed form `1 - alpha^(1/n)`) plus a **30-digit** mpmath cross-check independent of the float bisection.
+
+For the full pre-submission harness — a deterministic citation-integrity gate (`tools/check_citations.py`), an AI-artifact / hidden-text scrub (`tools/scrub_ai_artifacts.py`), an absolute-path guard (`tools/check_paths.sh`), plus the two checks above — run the one-command gate:
+
+```bash
+bash tools/presubmit.sh      # -> RESULT: ALL CLEAR
+```
+
+The offline subset (path guard + both CP checks + source scrub) also runs in CI on every push (`.github/workflows/verify-stats.yml`, Python 3.11 + 3.12). The reproducible record of the whole validation arc is in [`VALIDATION_WORKFLOW.md`](VALIDATION_WORKFLOW.md).

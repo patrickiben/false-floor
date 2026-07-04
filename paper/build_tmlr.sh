@@ -1,8 +1,13 @@
 #!/bin/bash
+# Portable, self-contained build: run from a fresh clone with no external directories.
+# Regenerates _abstract.tex/_body.tex from MANUSCRIPT_CAUTIONARY.md (the source of truth),
+# then compiles main.pdf. Needs pandoc + a LaTeX distribution (pdflatex, bibtex).
 set -e
-cd ~/Documents/EatThisMushroom
-SUB=tmlr_submission
-W=/tmp/_tmlr.md
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"   # this paper/ directory
+cd "$HERE"
+TMP="$(mktemp -d)"
+trap 'rm -rf "$TMP"' EXIT
+W="$TMP/_tmlr.md"
 cp MANUSCRIPT_CAUTIONARY.md "$W"
 # strip md title + subtitle headings (title block comes from \title)
 perl -ni -e 'print unless /^# A False Floor$/ || /^### How a weak baseline and a curated benchmark/' "$W"
@@ -31,14 +36,15 @@ s/contrastive \*\*CLIP\*\*\s*\n?\(ViT-L\/14\)/contrastive **CLIP** [\@radford202
 # yield notation "@80"/"@60" is not a citation -- convert so pandoc does not parse it as @key
 perl -0777 -i -pe 's/\@(\d+)/ at $1/g;' "$W"
 # split abstract / body (drop References section; bibtex regenerates it)
-awk '/^## Abstract$/{f=1;next} /^## 1\. Introduction$/{f=0} f' "$W" > /tmp/_abs.md
-awk '/^## 1\. Introduction$/{f=1} /^## References$/{f=0} f' "$W" > /tmp/_body.md
-# pandoc -> latex fragments
-pandoc /tmp/_abs.md  -t latex --natbib -o "$SUB/_abstract.tex"
-pandoc /tmp/_body.md -t latex --natbib -o "$SUB/_body.tex"
-# compile
-cd "$SUB"
-pdflatex -interaction=nonstopmode main.tex >/tmp/tex1.log 2>&1 || true
-bibtex main               >/tmp/bib.log  2>&1 || true
-pdflatex -interaction=nonstopmode main.tex >/tmp/tex2.log 2>&1 || true
-pdflatex -interaction=nonstopmode main.tex >/tmp/tex3.log 2>&1 || true
+awk '/^## Abstract$/{f=1;next} /^## 1\. Introduction$/{f=0} f' "$W" > "$TMP/_abs.md"
+awk '/^## 1\. Introduction$/{f=1} /^## References$/{f=0} f' "$W" > "$TMP/_body.md"
+# pandoc -> latex fragments (written into this paper/ dir, next to main.tex)
+pandoc "$TMP/_abs.md"  -t latex --natbib -o _abstract.tex
+pandoc "$TMP/_body.md" -t latex --natbib -o _body.tex
+# compile in place
+pdflatex -interaction=nonstopmode main.tex >"$TMP/tex1.log" 2>&1 || true
+bibtex main               >"$TMP/bib.log"  2>&1 || true
+pdflatex -interaction=nonstopmode main.tex >"$TMP/tex2.log" 2>&1 || true
+pdflatex -interaction=nonstopmode main.tex >"$TMP/tex3.log" 2>&1 || true
+echo "built $HERE/main.pdf"
+grep -c '\\bibitem' main.bbl 2>/dev/null | sed 's/^/bibitem count: /'

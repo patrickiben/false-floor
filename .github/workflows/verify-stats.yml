@@ -1,22 +1,23 @@
 name: verify-stats
 
-# Runs the paper's statistical-verification suite on a clean clone.
-# These checks need NO image data and NO torch: they prove the Clopper-Pearson
-# bound behind every false-eat / false-safe rate is correct (property-based +
-# differential vs scipy/statsmodels, and a SymPy/mpmath symbolic re-derivation).
+# Runs the deterministic, offline pre-submission checks on a clean clone.
+# NO image data and NO torch. It proves the Clopper-Pearson bound behind every
+# false-eat / false-safe rate is correct (property-based + differential vs
+# scipy/statsmodels, and a SymPy/mpmath symbolic re-derivation), guards against
+# machine-specific absolute paths, and scrubs the manuscript source for stray
+# AI artifacts / placeholders. (The network citation-integrity gate runs in
+# tools/presubmit.sh, not here.)
 
 on:
   push:
     branches: [main]
     paths:
-      - 'code/cp_bounds.py'
-      - 'code/test_cp_bounds.py'
-      - 'code/verify_cp_symbolic.py'
-      - 'code/hard_pairs.py'
-      - 'code/hard_regime.py'
-      - 'code/pairs_encoders.py'
-      - 'code/case3_snakes.py'
-      - 'code/case6_berries.py'
+      - 'code/**.py'
+      - 'tools/**'
+      - 'paper/MANUSCRIPT_CAUTIONARY.md'
+      - 'paper/main.tex'
+      - 'paper/_body.tex'
+      - 'paper/_abstract.tex'
       - '.github/workflows/verify-stats.yml'
   pull_request:
   workflow_dispatch:
@@ -37,9 +38,13 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install numpy scipy hypothesis statsmodels sympy mpmath
+      - name: Absolute-path guard (no machine-specific paths in code)
+        run: bash tools/check_paths.sh
       - name: Property-based + differential check of the Clopper-Pearson bound
         working-directory: code
         run: python test_cp_bounds.py
       - name: Symbolic re-derivation + 30-digit cross-check
         working-directory: code
         run: python verify_cp_symbolic.py
+      - name: Scrub manuscript source for AI artifacts / placeholders
+        run: python tools/scrub_ai_artifacts.py paper/MANUSCRIPT_CAUTIONARY.md paper/main.tex paper/_body.tex paper/_abstract.tex
