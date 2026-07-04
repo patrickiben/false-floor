@@ -7,8 +7,8 @@ Three independent checks:
       and n, the x=n and x=0 boundaries, and the DEFINING equation P(Bin(n, cp_upper) <= x) = alpha.
   (B) DIFFERENTIAL: cp_upper (a from-scratch bisection) must agree with three independent implementations --
       scipy Beta-quantile, scipy binomtest exact CI, and statsmodels proportion_confint(method='beta').
-  (C) INLINE CONSISTENCY: the cp_upper copied inline into the evaluation scripts is textually identical to the
-      canonical one tested here, so this test actually covers the code that produced the paper's numbers.
+  (C) INLINE CONSISTENCY: the cp_upper copied inline into every evaluation script computes the same bound as
+      the canonical one tested here (agreeing to < 1e-12), so this test covers the code that produced the numbers.
 
 Run: python test_cp_bounds.py   (no pytest needed; each Hypothesis property is invoked directly).
 """
@@ -107,12 +107,18 @@ def _extract_cp_upper_src(path):
     return m.group(0) if m else None
 
 def inline_consistency():
-    """Behaviourally verify the inline cp_upper in each evaluation script is the SAME function as the
-    canonical one (identical outputs on a grid) -- robust to docstring/whitespace differences."""
+    """Verify the inline cp_upper in every evaluation script computes the SAME Clopper-Pearson bound as the
+    canonical one, agreeing to < 1e-12 across a grid -- far below the 0.1% precision any bound is reported at.
+    Not bit-exact on purpose: hard_pairs.py and pairs_encoders.py accumulate the CDF with an explicit loop
+    while the others use sum(), which CPython 3.12+ evaluates with compensated (Neumaier) summation, so the two
+    can differ by ~1 ULP. That is irrelevant to every reported number but means exact `==` is the wrong test."""
     here = os.path.dirname(os.path.abspath(__file__))
     grid = [(x, n, al) for n in (1, 2, 5, 60, 90, 150, 300) for x in (0, 1, 2, n) for al in (0.05, 0.1) if x <= n]
-    checked = 0
-    for fn in ("hard_pairs.py", "hard_regime.py", "pairs_encoders.py", "case3_snakes.py", "case6_berries.py"):
+    TOL = 1e-12
+    scripts = ("case2_plants.py", "case3_snakes.py", "case4_spiders.py", "case5_frogs.py", "case6_berries.py",
+               "hard_pairs.py", "hard_regime.py", "pairs_encoders.py")
+    checked, worst = 0, 0.0
+    for fn in scripts:
         p = os.path.join(here, fn)
         if not os.path.exists(p):
             continue
@@ -123,10 +129,14 @@ def inline_consistency():
         f = ns["cp_upper"]
         for (x, n, al) in grid:
             a_out, b_out = f(x, n, al), cp_upper(x, n, al)
-            same = (a_out == b_out) or (a_out != a_out and b_out != b_out)  # nan==nan
-            assert same, f"{fn}: cp_upper({x},{n},{al})={a_out} != canonical {b_out}"
+            if a_out != a_out and b_out != b_out:  # nan == nan
+                continue
+            d = abs(a_out - b_out)
+            worst = max(worst, d)
+            assert d <= TOL, f"{fn}: cp_upper({x},{n},{al})={a_out} differs from canonical {b_out} by {d} > {TOL}"
         checked += 1
-    print(f"  -> cp_upper is behaviourally identical across {checked} evaluation scripts (grid of {len(grid)} inputs each)")
+    print(f"  -> every inline cp_upper matches canonical to <= {worst:.1e} across {checked} scripts "
+          f"(grid of {len(grid)} inputs; tol {TOL:g})")
 
 
 if __name__ == "__main__":

@@ -1,10 +1,12 @@
 """Canonical Clopper-Pearson binomial bound used throughout the paper's evaluation scripts.
 
-`cp_upper` here is byte-identical to the inline copy in hard_regime.py, hard_pairs.py, pairs_encoders.py,
-case2_plants.py ... case6_berries.py. Extracting the one canonical copy lets `test_cp_bounds.py`
-machine-check it (property-based + differential against scipy/statsmodels) and lets `verify_cp_symbolic.py`
-symbolically re-derive the Beta-binomial identity it rests on. The scripts keep their inline copies for
-self-containment; `test_cp_bounds.py` asserts those copies are textually identical to this one.
+`cp_upper` here is the canonical copy of the same-algorithm bound inlined into each evaluation script
+(hard_regime.py, hard_pairs.py, pairs_encoders.py, case2_plants.py ... case6_berries.py). Extracting one
+copy lets `test_cp_bounds.py` machine-check it (property-based + differential against scipy/statsmodels) and
+lets `verify_cp_symbolic.py` symbolically re-derive the Beta-binomial identity it rests on. The scripts keep
+their inline copies for self-containment; `test_cp_bounds.py` asserts every copy computes the same bound as
+this one to < 1e-12 (hard_pairs.py and pairs_encoders.py sum the CDF with an explicit loop rather than sum(),
+which is compensated on CPython 3.12+, so they can differ by ~1 ULP -- far below the reported precision).
 """
 import math
 
