@@ -29,9 +29,9 @@ absolute rate. (The strong-encoder cells are near-zero rather than exact zeros: 
 sampling they read a bare "0.0%" whose ≈4.9% upper bound overlapped the original residual. At full sampling
 they read 0.1–0.7%, with a single-cell bound ≈2% and a pooled bound ≈0.4%.) An information limit is a property
 of the *photograph* and would bind every encoder equally, so a stronger backbone that beats a weaker one within
-every pair is incompatible with one: the "information limit" was a **weak-baseline artifact**. We show this across
+every pair is incompatible with one: the "information limit" was a **weak-baseline artifact**. These random-sample rates, however low, do not bound the worst-case individual specimen, which we could not test and which remains the thesis's one honest residual (§6). We show this across
 **six lethal look-alike decisions spanning five biological groups** (fungi, plants, reptiles, arachnids,
-amphibians), **three anchored to externally-published indistinguishability claims** (coral-snake mimicry,
+amphibians), **three anchored to externally-published claims** (two of visual indistinguishability, one of systematic misidentification: coral-snake mimicry,
 Pfennig et al. *Nature* 2001; brown-recluse misidentification, Vetter; poison-frog mimicry, Symula et al.
 *Proc. R. Soc. B* 2001). In every group the weak encoder leaves a large false-safe rate (often near-chance,
 clearing up to half of the dangerous specimens) that a stronger frozen encoder beats within every pair: to
@@ -56,7 +56,7 @@ revision, because they feel like theorems and are rarely re-examined.
 This paper is a fully-worked cautionary study of how a negative claim can be confidently produced, defended
 against adversarial scrutiny, and still be false. It is anchored on one mushroom self-refutation and replicated
 across five further look-alike decisions in other kingdoms (§3.1–§3.2), three of them re-examinations of
-externally-published indistinguishability claims, to show the failure is not domain-specific. We did not set out to write it. We set out to
+externally-published look-alike claims, to show the failure is not domain-specific. We did not set out to write it. We set out to
 answer whether "should I eat this mushroom?" is answerable from a photograph, and concluded after months of work
 that it is not, that the limit is *information*, not method, and wrote that paper. Then, preparing it for
 review, we did the one thing the original investigation never did: we replaced a deliberately
@@ -75,9 +75,12 @@ al., *A Metric Learning Reality Check*, 2020), recommender progress that does no
 dataset-bias and distribution-shift program (Torralba & Efros 2011; WILDS, Koh et al. 2021; ImageNet-A, Hendrycks
 et al. 2021). Our contribution is the **negative-side analogue and its asymmetry.** A limitation/impossibility
 claim inherits the weakness of its strongest-*failing* baseline exactly as a positive claim inherits its
-weakest-*tuned* one. But the community has standard instrumentation for the positive case (strong baselines,
-ablations) and almost none for the negative, and, more sharply, a *self-verification discipline calibrated to
-catch rigged wins is structurally blind to over-claimed losses* (§4d). Two nearest neighbors deserve explicit
+weakest-*tuned* one. But the community's instrumentation for the negative case is thinner and concentrated in one subfield.
+Adversarial robustness already institutionalizes the move: a claimed defense or robustness limit is routinely
+overturned by a stronger, adaptive attack within the same setup (Athalye et al. 2018; Tramèr et al. 2020).
+Outside that subfield, and for frozen-representation limit claims in particular, the practice is largely
+absent, and, more sharply, a *self-verification discipline calibrated to catch rigged wins is structurally
+blind to over-claimed losses* (§4d). Two nearest neighbors deserve explicit
 distinction. **McGreivy & Hakim (2024, *Nat. Mach. Intell.* 6:1256–1269)** find that 79% of ML-for-PDE papers
 claiming to beat standard solvers compared against weak baselines, with widespread under-reporting of negatives.
 That is the closest positive-side analogue. Our delta is the *negative-claim* direction and the representation-invariance
@@ -144,6 +147,14 @@ pairs (field-mushroom/Destroying-Angel, chanterelle/jack-o'-lantern, morel/false
 lantern, puffball/death-cap-button) and encoded each with three paradigmatically different strong frozen
 encoders: masked-latent **I-JEPA** (ViT-H/14), self-distilled **DINOv2** (ViT-L/14), and contrastive **CLIP**
 (ViT-L/14). Per cell, the actual false-eat at 80% edible-yield, 10 seeds.
+
+**Decision rule.** On each encoder's frozen embeddings we fit the identical probe: an ensemble of small
+multilayer-perceptron risk nets (three linear layers with 128 and 32 hidden units and a sigmoid output giving
+the probability of "poisonous"), each trained on the per-seed 30% train split. The ensemble mean is the risk
+score and its standard deviation is the disagreement referred to in §2. The eat/abstain rule thresholds the
+ensemble-mean risk at the operating point that gives 80% edible yield on the split. Because the same probe is
+applied to every encoder, a within-pair difference in false-eat is attributable to the representation and not
+to the read-out. Exact encoder checkpoints and probe hyperparameters are in Appendix C.
 
 | mean over 5 pairs | I-JEPA-H14 | DINOv2-L | CLIP-L |
 |---|---|---|---|
@@ -230,8 +241,9 @@ same three encoders, same eval, same Clopper-Pearson bounds (n = 90 held-out poi
 
 The pattern reproduces, more clearly than in mushrooms. The weak encoder leaves a **measured 5.8–16.2%
 false-eat** (a residual that, reported alone, would read as a substantial information limit on a deadly
-decision), and a stronger frozen encoder reduces it to 0–0.8% within every pair (the I-JEPA
-intervals, ≤11–24%, do not overlap the DINOv2 point estimates). The representation-invariance test (§5.1,
+decision), and a stronger frozen encoder reduces it to 0–0.8% within every pair (the I-JEPA one-sided 95% lower bounds, 2.2–10.6%, exceed the DINOv2 point estimates in
+every pair, and clear the DINOv2 upper bounds in two of the three pairs, with water-hemlock / wild-carrot the
+lone overlap: I-JEPA lower 2.2% against DINOv2 upper 3.3%). The representation-invariance test (§5.1,
 item 2) flags both domains identically: a limit one encoder sees and another does not is a property of the
 encoder, not the photograph. The failure is **not mushroom-specific**; it is a generic hazard of anchoring a
 safety-negative on a weak representation. (Both these cases are our own constructions; §3.2 takes the next
@@ -240,8 +252,8 @@ step and re-examines three *externally published* indistinguishability claims.)
 ### 3.2 The same protocol across five biological groups: three external claims
 
 To test the failure mode at scale, we ran the identical three-encoder protocol on a battery of well-known
-lethal look-alike confusions spanning five biological groups, **three of them anchored to externally-published
-claims of visual indistinguishability**, so the "limit" is not one we authored:
+lethal look-alike confusions spanning five biological groups, **three of them anchored to externally-published claims** (two of visual indistinguishability, one of
+systematic human misidentification), so the "limit" is not one we authored:
 
 | case (group) | external "look-alike" claim | I-JEPA false-safe @80% | DINOv2 |
 |---|---|---|---|
@@ -259,11 +271,16 @@ weak encoder leaves a large, measured false-safe rate, frequently **near-chance*
 and the *fantastica* / *imitator* pairs reach AUROC 0.73 and 0.72, clearing roughly half of the dangerous
 specimens), and a stronger frozen encoder lowers it within every pair, to near-zero in every group but the
 small-sample poison frogs (qualifier iii). A reviewer shown only the I-JEPA column would reasonably conclude
-that several of these decisions sit at an information limit. For the three external rows, the literature says
-exactly that: coral snakes and their mimics are "near-indistinguishable"
-(Pfennig 2001), brown recluses are massively over-reported because non-experts cannot tell them from harmless
-house spiders (Vetter), poison-frog mimics co-evolved to be visually identical to their models (Symula 2001).
-None of these external indistinguishability claims binds a strong frozen encoder.
+that several of these decisions sit at an information limit. For the three external rows the published literature broadly agrees, in two distinct senses. For the coral
+snakes and poison frogs it asserts visual near-identity: the coral snake and its kingsnake mimics are a
+canonical Batesian look-alike pair, their resemblance the premise of the frequency-dependent mimicry Pfennig
+et al. 2001 established, and poison-frog mimics co-evolved to be visually identical to their models (Symula
+2001). The brown recluse is a different kind of anchor: Vetter documents that recluses are massively
+over-reported because non-experts rely on the unreliable violin marking rather than the diagnostic eye
+arrangement, a systematic human-misidentification rather than a claim of visual indistinguishability. A strong
+encoder separating the recluse pair is therefore consistent with Vetter, while it violates the
+visual-indistinguishability premise the snakes and frogs are supposed to satisfy. In every row the weak
+encoder reproduces the human-level confusion and the strong encoder does not.
 
 Three honest qualifiers. (i) These are species distributions on (often whole-organism) GBIF photographs, so they
 test *species separability*, not the isolated diagnostic confusion a forager faces with a single berry cluster
@@ -316,7 +333,7 @@ verification discipline tuned to catch over-claimed wins is blind to over-claime
 
 The unifying point is that we instrumented heavily against finding a false positive and not at all against
 asserting a false negative. That asymmetry is the central lesson. We establish it from six case studies across
-five biological groups (three re-examining externally-published indistinguishability claims). This is an
+five biological groups (three re-examining externally-published look-alike claims). This is an
 existence proof and a protocol, not a measured base rate over the literature; how often published limit claims
 are refuted by the strong-baseline test is the question §5.1 operationalizes.
 
@@ -400,8 +417,9 @@ We built a careful, reproduced, adversarially-verified case that a lethal recogn
 information-limited, and we were wrong: the limit was a weak-baseline artifact. A stronger frozen encoder
 beat the weak one *within every pair*, which an information limit forbids, across curated, field-degraded, and
 open-set regimes including the textbook-undecidable pairs, and then again across six lethal look-alike
-decisions in five biological groups, three of them re-examining externally-published "near-indistinguishable"
-claims that a strong encoder violates. We report the sequence because the failure is general: a
+decisions in five biological groups, three of them re-examining externally-published look-alike claims, two of
+visual indistinguishability that a strong encoder violates and one of systematic human misidentification that
+it instead corroborates. We report the sequence because the failure is general: a
 limitation claim is only as strong as the baseline that fails to beat it, curated benchmarks understate field
 difficulty while overstating model limits, and a verification discipline built to catch false positives will
 miss false negatives. The contribution is methodological rather than mycological: a worked demonstration,
@@ -487,6 +505,23 @@ patch tokens and compares I-JEPA {mean, max} against DINOv2 {CLS, mean, max}. Th
 method-sweep scripts enumerated in the companion document. All GBIF image scrapes are reproducible via the
 `species/match` + `occurrence/search` endpoints in the `scrape_*.py` files.
 
+The three frozen encoders are the public HuggingFace checkpoints `facebook/ijepa_vith14_1k` (I-JEPA ViT-H/14,
+mean-pooled last hidden state), `facebook/dinov2-large` (DINOv2 ViT-L/14, no registers, CLS token), and
+`openai/clip-vit-large-patch14` (CLIP ViT-L/14, pooled projection). Each image is preprocessed by that model's
+own HuggingFace image processor, at its canonical resolution and normalization. The decision probe of §3 is the
+MLP-ensemble risk net in `model.py`, trained per seed on the 30% split.
+
+**AI use and verification.** The adversarial-verification panels referred to throughout (the discipline of §2
+and §4d, and the red-team of §5.1) are panels of large-language-model agents run under a fixed protocol: each
+finding is produced by one agent and then checked by independent agents instructed to refute it, and only
+majority-surviving findings are kept. We used large-language-model assistance for that verification, for writing
+and editing, and for building the analysis and scraping tooling. We did not use any model to generate, alter,
+or impute data. All images are real GBIF photographs obtained through the documented endpoints, and the
+synthetic-augmentation experiments are described as experiments that did not remove the residual. Every
+quantitative claim was produced by the named deterministic scripts, and the Clopper-Pearson bounds that carry
+the conclusions were independently re-derived and machine-checked. The authors verified each AI-assisted claim
+against its artifact and take full responsibility for the content.
+
 ### Appendix C.1: Per-pair tables for the §3.2 battery
 
 The §3.2 summary collapses each case to a range; the full per-pair results follow (10-seed
@@ -543,6 +578,8 @@ evidence as suggestive, not confirmatory. The other four groups (n=90–150) are
 
 Assran, M., Duval, Q., Misra, I., Bojanowski, P., Vincent, P., Rabbat, M., LeCun, Y. & Ballas, N. (2023). Self-supervised learning from images with a joint-embedding predictive architecture (I-JEPA). *CVPR.*
 
+Athalye, A., Carlini, N. & Wagner, D. (2018). Obfuscated gradients give a false sense of security: Circumventing defenses to adversarial examples. *ICML.*
+
 Bouthillier, X., Delaunay, P., Bronzi, M., et al. (2021). Accounting for variance in machine learning benchmarks. *Proceedings of MLSys.*
 
 Dacrema, M. F., Cremonesi, P. & Jannach, D. (2019). Are we really making much progress? A worrying analysis of recent neural recommendation approaches. *RecSys.*
@@ -555,7 +592,7 @@ Hendrycks, D., Zhao, K., Basart, S., Steinhardt, J. & Song, D. (2021). Natural a
 
 Koh, P. W., Sagawa, S., Marklund, H., et al. (2021). WILDS: A benchmark of in-the-wild distribution shifts. *ICML.*
 
-Kuznetsov, A., et al. (2026). AI-mediated risks and real-life challenges in mushroom foraging. *npj Science of Food*, 10, 121. doi:10.1038/s41538-026-00752-4
+Kuznetsov, N. V., et al. (2026). AI-mediated risks and real-life challenges in mushroom foraging. *npj Science of Food*, 10, 121. doi:10.1038/s41538-026-00752-4
 
 McGreivy, N. & Hakim, A. (2024). Weak baselines and reporting biases lead to overoptimism in machine learning for fluid-related partial differential equations. *Nature Machine Intelligence*, 6, 1256–1269. doi:10.1038/s42256-024-00897-5
 
@@ -570,5 +607,7 @@ Radford, A., Kim, J. W., Hallacy, C., et al. (2021). Learning transferable visua
 Symula, R., Schulte, R. & Summers, K. (2001). Molecular phylogenetic evidence for a mimetic radiation in Peruvian poison frogs supports a Müllerian mimicry hypothesis. *Proceedings of the Royal Society of London B*, 268, 2415–2421.
 
 Torralba, A. & Efros, A. A. (2011). Unbiased look at dataset bias. *CVPR.*
+
+Tramèr, F., Carlini, N., Brendel, W. & Madry, A. (2020). On adaptive attacks to adversarial example defenses. *NeurIPS.*
 
 Vetter, R. S. (1999). Identifying and misidentifying the brown recluse spider. *Dermatology Online Journal*, 5(2), 7.

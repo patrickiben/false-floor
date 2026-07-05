@@ -15,6 +15,7 @@ perl -ni -e 'print unless /^# A False Floor$/ || /^### How a weak baseline and a
 perl -0777 -i -pe '
 s/\(Musgrave et\s+al\., \*A Metric Learning Reality Check\*, 2020\)/[\@musgrave2020]/g;
 s/\(Dacrema et al\., 2019\)/[\@dacrema2019]/g;
+s/\(Athalye et al\. 2018; Tram\S+r et al\. 2020\)/[\@athalye2018; \@tramer2020]/g;
 s/\(Dehghani et al\., \*The Benchmark Lottery\*,\s+2021;\s*Bouthillier et al\. on benchmark variance, 2021\)/[\@dehghani2021; \@bouthillier2021]/g;
 s/\(Torralba & Efros 2011; WILDS, Koh et al\. 2021; ImageNet-A, Hendrycks\s+et al\. 2021\)/[\@torralba2011; \@koh2021; \@hendrycks2021]/g;
 s/\*\*McGreivy & Hakim \(2024[^)]*\)\*\*/\\citet{mcgreivy2024}/g;

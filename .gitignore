@@ -22,3 +22,6 @@ paper/main.out
 
 # generated verification reports
 _reports/
+
+# pre-submission fix drafts (now applied; kept local, not public)
+PROPOSED_*.md
