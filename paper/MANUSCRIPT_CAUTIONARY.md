@@ -1,5 +1,5 @@
 # A False Floor
-### How a weak baseline and a curated benchmark manufactured an "information limit" on a lethal recognition task, and how a stronger baseline refuted it
+### How Weak Baselines Manufacture Information Limits
 
 *A cautionary case study on the fragility of safety-**negative** claims in machine learning.*
 

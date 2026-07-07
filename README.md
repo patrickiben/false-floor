@@ -1,6 +1,6 @@
 # A False Floor
 
-Code and manuscript for *"A False Floor: How a Weak Baseline and a Curated Benchmark Produced an 'Information Limit' on a Lethal Recognition Task that a Stronger Baseline then Refuted."*
+Code and manuscript for *"A False Floor: How Weak Baselines Manufacture Information Limits."*
 
 A cautionary methods study. An investigation concluded that "should I eat this mushroom?" is **information-limited** — a strong aggregate separability coexisting with an irreducible confidently-wrong residual no method removed. Swapping the frozen, mean-pooled I-JEPA backbone for a stronger frozen encoder (DINOv2) refuted that conclusion. The same pattern reproduces across **six lethal look-alike decisions in five biological groups** (fungi, plants, reptiles, arachnids, amphibians), three of them re-examinations of externally-published indistinguishability claims (coral-snake mimicry, brown-recluse misidentification, poison-frog mimicry). The lesson: a limitation claim is only as strong as the baseline that fails to beat it, and a verification discipline built to catch false positives is blind to false negatives.
 

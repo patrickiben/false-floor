@@ -10,7 +10,7 @@ trap 'rm -rf "$TMP"' EXIT
 W="$TMP/_tmlr.md"
 cp MANUSCRIPT_CAUTIONARY.md "$W"
 # strip md title + subtitle headings (title block comes from \title)
-perl -ni -e 'print unless /^# A False Floor$/ || /^### How a weak baseline and a curated benchmark/' "$W"
+perl -ni -e 'print unless /^# A False Floor$/ || /^### How Weak Baselines Manufacture Information Limits/' "$W"
 # citations -> pandoc syntax (slurp mode handles line-wrapped ones)
 perl -0777 -i -pe '
 s/\(Musgrave et\s+al\., \*A Metric Learning Reality Check\*, 2020\)/[\@musgrave2020]/g;
