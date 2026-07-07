@@ -11,11 +11,10 @@ Decision rules:
   CAUTIOUS: eat iff safe AND base visible AND no volva AND gills are NOT white-and-free. Else abstain.
             (Destroying Angels = white free gills + volva at base -> the cautious rule should catch them.)
 
-SETUP on the Mac Studio (one time):
-  source ~/Documents/Pattern1_LangGoal_Planner/.venv/bin/activate
+SETUP (one time):
+  python -m venv .venv && source .venv/bin/activate
   pip install torchvision qwen-vl-utils accelerate          # torchvision is REQUIRED for Qwen2.5-VL
-RUN:
-  cd ~/Documents/EatThisMushroom
+RUN (from the repository root):
   python vlm_reasoner.py                                     # Qwen2.5-VL-7B, 80/class
   python vlm_reasoner.py --model Qwen/Qwen2.5-VL-32B-Instruct --load4bit   # max capability (needs bitsandbytes)
   python vlm_reasoner.py --model HuggingFaceTB/SmolVLM-Instruct            # the small pilot baseline

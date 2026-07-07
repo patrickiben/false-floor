@@ -3,7 +3,7 @@
 Split-conformal (LAC/THR) over the trained SPECIES {chanterelle(E), jack-o'-lantern(P),
 field mushroom(E), destroying angel(P)}. For each test mushroom we form a prediction set with a
 distribution-free marginal coverage guarantee 1-alpha, then EAT only if the set is non-empty and
-contains ONLY edible species (Patrick's rule). Scored on the SAME held-out specimens as everything.
+contains ONLY edible species (the safety rule). Scored on the SAME held-out specimens as everything.
 
 Two honest stress points this exposes:
   (a) coverage-vs-yield: to make the set include the true toxic label ~always (safety), sets blow up

@@ -1,4 +1,4 @@
-"""The inversion (Patrick): predict in the direction you TRUST -- micro->macro (forward/well-posed) -- generate
+"""The inversion: predict in the direction you TRUST -- micro->macro (forward/well-posed) -- generate
 synthetic macros grounded in the diagnostic micro, then diagnose with those.
 
 Decisive test on real lethal-pair I-JEPA macro latents (field mushroom vs Destroying Angel). A micro->macro

@@ -1,4 +1,4 @@
-"""FGVR metric-learning head on FROZEN I-JEPA latents (the sovereignty-preserving lever).
+"""FGVR metric-learning head on FROZEN I-JEPA latents (the frozen-backbone lever).
 
 Trains a triplet/contrastive projection that pulls same-species latents together and pushes the
 toxic lookalike away -- on the FROZEN latents, no encoder fine-tuning. Honest question: does

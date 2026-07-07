@@ -1,5 +1,5 @@
 """EMPIRICAL version of the topology test: a real single-view LRM (TripoSR) reconstructs actual mushroom
-photos -> persistent homology (Betti B0/B1/B2) on the reconstruction. Patrick asked for the real LRM, not
+photos -> persistent homology (Betti B0/B1/B2) on the reconstruction. This uses the real LRM, not
 the synthetic lab. Question: does a real LRM reconstruction of a real Amanita (volva) differ topologically
 from an Agaricus (no volva)?
 

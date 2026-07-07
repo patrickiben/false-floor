@@ -67,7 +67,7 @@ def main():
     r1, r2, r3 = (rows[n] for n, _ in regimes)
     print(f"\nverdict:")
     print(f"  - ensemble disagreement alone: false-eats {r1['false_eat']} -> {r2['false_eat']} "
-          f"(helps, but MISSES the confidently-wrong-consensus lookalikes -- the Seam-3 lesson).")
+          f"(helps, but MISSES the confidently-wrong-consensus lookalikes).")
     print(f"  - + observation-surprise (knowing the input is off-manifold): false-eats -> {r3['false_eat']} (SAFE),")
     print(f"    but safe-eats {r1['safe_eat']} -> {r3['safe_eat']}: the cost of safety is abstaining on the")
     print(f"    whole class you never learned to recognize. A safe forager doesn't eat what it can't place.")

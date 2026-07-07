@@ -23,7 +23,7 @@ class Cfg:
     ood_odor_value: str = "n"
     odor_feature_index: int = 4        # 0-based index among the 22 features (odor is the 5th)
 
-    # ensemble (epistemic engine, reused in spirit from the Seam-3 pilot)
+    # ensemble (epistemic engine)
     ensemble_k: int = 12
     steps: int = 400
     batch: int = 256

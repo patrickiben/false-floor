@@ -1,4 +1,4 @@
-"""MORE external-anchored cases (Patrick: spiders + poison frogs). Two more kingdoms with citable look-alike
+"""MORE external-anchored cases (spiders + poison frogs). Two more kingdoms with citable look-alike
 claims:
   SPIDERS -- brown recluse (Loxosceles reclusa, medically significant) vs the harmless house/wolf spiders
     constantly mistaken for it. External claim: the recluse-MISIDENTIFICATION literature (Vetter 2008,

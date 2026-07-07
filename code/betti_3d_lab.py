@@ -1,6 +1,6 @@
 """3D topological lab: do Betti numbers (B0/B1/B2) of the mushroom SHAPE separate Amanita from Agaricus?
 
-Patrick's idea: use the 3D structure's topological invariants (pose/lighting/specimen-invariant). We build
+The idea: use the 3D structure's topological invariants (pose/lighting/specimen-invariant). We build
 anatomically-faithful voxel mushrooms with KNOWN geometry, validate the homology engine on sanity shapes,
 then compute the actual Betti numbers -- and let them fall where they may. (Controlled ground-truth shapes,
 so the test isolates the topology question from LRM reconstruction noise; the LRM-on-real-photos version adds

@@ -1,5 +1,5 @@
 """Risk net + ensemble. Each member predicts P(poisonous); the ensemble's MEAN is the
-pragmatic risk and its STD across members is the epistemic uncertainty (the Seam-3 lesson:
+pragmatic risk and its STD across members is the epistemic uncertainty (member
 disagreement = where the model has no support, e.g. the odorless lookalikes)."""
 from __future__ import annotations
 

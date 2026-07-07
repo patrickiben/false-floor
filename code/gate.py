@@ -1,16 +1,15 @@
 """The symmetrization-null gate -- the standing protocol EVERY new abstention signal must
-pass before it earns a place. Ported from the CRT manuscript's directional-plume null (the
-ONE thing that genuinely transferred: the falsification discipline, not a metric).
+pass before it earns a place. It enforces a falsification discipline, not a metric.
 
 A candidate signal PASSES only if it adds incremental predictive power for false-eat BEYOND a
 baseline that ALREADY INCLUDES the classifier's own risk + standard symmetric measures -- and,
 if it claims to be DIRECTED, only if symmetrizing it destroys that added value. This is exactly
-the check that would have caught (a) the harmonization tautology and (b) my own circular
-directed kill-test.
+the check that catches (a) a signal redundant with the symmetric baseline (a tautology) and
+(b) a circular "directed" test whose value is really symmetric.
 
 Verdicts:
   FAIL-redundant            adds ~nothing over [risk + symmetric baselines] (the tautology trap)
-  FAIL-direction-washes-out the value is in its SYMMETRIC part; directedness adds ~0 (the CRT null)
+  FAIL-direction-washes-out the value is in its SYMMETRIC part; directedness adds ~0
   PASS-separable-only       adds value, but ~0 on the coincident floor (a real but bounded keeper)
   PASS                      adds value, including on the hard regime
 """

@@ -2,7 +2,7 @@
 (or planted synthetic latents), with continuous-latent observation-surprise (Mahalanobis).
 
   python evaluate_images.py              # synthetic smoke (no weights/data)
-  python evaluate_images.py --real       # real I-JEPA over data/fungi/  (run on your M4 Max)
+  python evaluate_images.py --real       # real I-JEPA over data/fungi/
 """
 from __future__ import annotations
 
