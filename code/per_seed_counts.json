@@ -1,0 +1,1937 @@
+{
+ "env": "torch 2.8.0, numpy 2.0.2",
+ "cells": {
+  "hard_regime: Agaricus/A.bisporigera DINOv2 + LOOKALIKE_OPENSET(1151)": [
+   {
+    "seed": 0,
+    "n_p": 150,
+    "eaten": 2,
+    "n_o": 1151,
+    "open_eaten": 0
+   },
+   {
+    "seed": 1,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 1151,
+    "open_eaten": 1
+   },
+   {
+    "seed": 2,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 1151,
+    "open_eaten": 2
+   },
+   {
+    "seed": 3,
+    "n_p": 150,
+    "eaten": 1,
+    "n_o": 1151,
+    "open_eaten": 3
+   },
+   {
+    "seed": 4,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 1151,
+    "open_eaten": 2
+   },
+   {
+    "seed": 5,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 1151,
+    "open_eaten": 2
+   },
+   {
+    "seed": 6,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 1151,
+    "open_eaten": 1
+   },
+   {
+    "seed": 7,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 1151,
+    "open_eaten": 3
+   },
+   {
+    "seed": 8,
+    "n_p": 150,
+    "eaten": 1,
+    "n_o": 1151,
+    "open_eaten": 2
+   },
+   {
+    "seed": 9,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 1151,
+    "open_eaten": 4
+   }
+  ],
+  "pairs_encoders: Agaricus / Destroying-Angel [I-JEPA-H14]": [
+   {
+    "seed": 0,
+    "n_p": 150,
+    "eaten": 4,
+    "n_o": 906,
+    "open_eaten": 219
+   },
+   {
+    "seed": 1,
+    "n_p": 150,
+    "eaten": 6,
+    "n_o": 906,
+    "open_eaten": 322
+   },
+   {
+    "seed": 2,
+    "n_p": 150,
+    "eaten": 2,
+    "n_o": 906,
+    "open_eaten": 189
+   },
+   {
+    "seed": 3,
+    "n_p": 150,
+    "eaten": 8,
+    "n_o": 906,
+    "open_eaten": 280
+   },
+   {
+    "seed": 4,
+    "n_p": 150,
+    "eaten": 6,
+    "n_o": 906,
+    "open_eaten": 301
+   },
+   {
+    "seed": 5,
+    "n_p": 150,
+    "eaten": 3,
+    "n_o": 906,
+    "open_eaten": 252
+   },
+   {
+    "seed": 6,
+    "n_p": 150,
+    "eaten": 3,
+    "n_o": 906,
+    "open_eaten": 155
+   },
+   {
+    "seed": 7,
+    "n_p": 150,
+    "eaten": 5,
+    "n_o": 906,
+    "open_eaten": 149
+   },
+   {
+    "seed": 8,
+    "n_p": 150,
+    "eaten": 7,
+    "n_o": 906,
+    "open_eaten": 239
+   },
+   {
+    "seed": 9,
+    "n_p": 150,
+    "eaten": 9,
+    "n_o": 906,
+    "open_eaten": 280
+   }
+  ],
+  "pairs_encoders: Chanterelle / Jack-o-lantern [I-JEPA-H14]": [
+   {
+    "seed": 0,
+    "n_p": 150,
+    "eaten": 2,
+    "n_o": 906,
+    "open_eaten": 448
+   },
+   {
+    "seed": 1,
+    "n_p": 150,
+    "eaten": 2,
+    "n_o": 906,
+    "open_eaten": 370
+   },
+   {
+    "seed": 2,
+    "n_p": 150,
+    "eaten": 3,
+    "n_o": 906,
+    "open_eaten": 407
+   },
+   {
+    "seed": 3,
+    "n_p": 150,
+    "eaten": 3,
+    "n_o": 906,
+    "open_eaten": 381
+   },
+   {
+    "seed": 4,
+    "n_p": 150,
+    "eaten": 2,
+    "n_o": 906,
+    "open_eaten": 337
+   },
+   {
+    "seed": 5,
+    "n_p": 150,
+    "eaten": 5,
+    "n_o": 906,
+    "open_eaten": 428
+   },
+   {
+    "seed": 6,
+    "n_p": 150,
+    "eaten": 2,
+    "n_o": 906,
+    "open_eaten": 355
+   },
+   {
+    "seed": 7,
+    "n_p": 150,
+    "eaten": 1,
+    "n_o": 906,
+    "open_eaten": 383
+   },
+   {
+    "seed": 8,
+    "n_p": 150,
+    "eaten": 1,
+    "n_o": 906,
+    "open_eaten": 411
+   },
+   {
+    "seed": 9,
+    "n_p": 150,
+    "eaten": 5,
+    "n_o": 906,
+    "open_eaten": 370
+   }
+  ],
+  "pairs_encoders: Morel / False-morel [I-JEPA-H14]": [
+   {
+    "seed": 0,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 85
+   },
+   {
+    "seed": 1,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 15
+   },
+   {
+    "seed": 2,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 24
+   },
+   {
+    "seed": 3,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 20
+   },
+   {
+    "seed": 4,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 42
+   },
+   {
+    "seed": 5,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 25
+   },
+   {
+    "seed": 6,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 107
+   },
+   {
+    "seed": 7,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 23
+   },
+   {
+    "seed": 8,
+    "n_p": 120,
+    "eaten": 1,
+    "n_o": 906,
+    "open_eaten": 82
+   },
+   {
+    "seed": 9,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 40
+   }
+  ],
+  "pairs_encoders: Oyster / Jack-o-lantern [I-JEPA-H14]": [
+   {
+    "seed": 0,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 229
+   },
+   {
+    "seed": 1,
+    "n_p": 150,
+    "eaten": 1,
+    "n_o": 906,
+    "open_eaten": 220
+   },
+   {
+    "seed": 2,
+    "n_p": 150,
+    "eaten": 1,
+    "n_o": 906,
+    "open_eaten": 190
+   },
+   {
+    "seed": 3,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 207
+   },
+   {
+    "seed": 4,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 205
+   },
+   {
+    "seed": 5,
+    "n_p": 150,
+    "eaten": 1,
+    "n_o": 906,
+    "open_eaten": 208
+   },
+   {
+    "seed": 6,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 249
+   },
+   {
+    "seed": 7,
+    "n_p": 150,
+    "eaten": 1,
+    "n_o": 906,
+    "open_eaten": 250
+   },
+   {
+    "seed": 8,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 156
+   },
+   {
+    "seed": 9,
+    "n_p": 150,
+    "eaten": 2,
+    "n_o": 906,
+    "open_eaten": 203
+   }
+  ],
+  "pairs_encoders: Puffball / Deathcap-button [I-JEPA-H14]": [
+   {
+    "seed": 0,
+    "n_p": 150,
+    "eaten": 1,
+    "n_o": 906,
+    "open_eaten": 288
+   },
+   {
+    "seed": 1,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 386
+   },
+   {
+    "seed": 2,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 309
+   },
+   {
+    "seed": 3,
+    "n_p": 150,
+    "eaten": 1,
+    "n_o": 906,
+    "open_eaten": 305
+   },
+   {
+    "seed": 4,
+    "n_p": 150,
+    "eaten": 1,
+    "n_o": 906,
+    "open_eaten": 348
+   },
+   {
+    "seed": 5,
+    "n_p": 150,
+    "eaten": 1,
+    "n_o": 906,
+    "open_eaten": 373
+   },
+   {
+    "seed": 6,
+    "n_p": 150,
+    "eaten": 2,
+    "n_o": 906,
+    "open_eaten": 452
+   },
+   {
+    "seed": 7,
+    "n_p": 150,
+    "eaten": 1,
+    "n_o": 906,
+    "open_eaten": 356
+   },
+   {
+    "seed": 8,
+    "n_p": 150,
+    "eaten": 2,
+    "n_o": 906,
+    "open_eaten": 272
+   },
+   {
+    "seed": 9,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 338
+   }
+  ],
+  "pairs_encoders: Agaricus / Destroying-Angel [DINOv2-L]": [
+   {
+    "seed": 0,
+    "n_p": 150,
+    "eaten": 2,
+    "n_o": 906,
+    "open_eaten": 5
+   },
+   {
+    "seed": 1,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 35
+   },
+   {
+    "seed": 2,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 18
+   },
+   {
+    "seed": 3,
+    "n_p": 150,
+    "eaten": 1,
+    "n_o": 906,
+    "open_eaten": 46
+   },
+   {
+    "seed": 4,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 7
+   },
+   {
+    "seed": 5,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 9
+   },
+   {
+    "seed": 6,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 28
+   },
+   {
+    "seed": 7,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 9
+   },
+   {
+    "seed": 8,
+    "n_p": 150,
+    "eaten": 1,
+    "n_o": 906,
+    "open_eaten": 18
+   },
+   {
+    "seed": 9,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 34
+   }
+  ],
+  "pairs_encoders: Chanterelle / Jack-o-lantern [DINOv2-L]": [
+   {
+    "seed": 0,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 1,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 2,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 3,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 4,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 5,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 6,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 7,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 8,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 9,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   }
+  ],
+  "pairs_encoders: Morel / False-morel [DINOv2-L]": [
+   {
+    "seed": 0,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 1,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 2,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 3,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 4,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 5,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 6,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 7,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 8,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 9,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   }
+  ],
+  "pairs_encoders: Oyster / Jack-o-lantern [DINOv2-L]": [
+   {
+    "seed": 0,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 1
+   },
+   {
+    "seed": 1,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 1
+   },
+   {
+    "seed": 2,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 1
+   },
+   {
+    "seed": 3,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 1
+   },
+   {
+    "seed": 4,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 1
+   },
+   {
+    "seed": 5,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 1
+   },
+   {
+    "seed": 6,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 1
+   },
+   {
+    "seed": 7,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 1
+   },
+   {
+    "seed": 8,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 1
+   },
+   {
+    "seed": 9,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 1
+   }
+  ],
+  "pairs_encoders: Puffball / Deathcap-button [DINOv2-L]": [
+   {
+    "seed": 0,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 1,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 2,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 3,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 4,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 5,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 6,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 7,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 8,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 9,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   }
+  ],
+  "pairs_encoders: Agaricus / Destroying-Angel [CLIP-L]": [
+   {
+    "seed": 0,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 35
+   },
+   {
+    "seed": 1,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 58
+   },
+   {
+    "seed": 2,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 57
+   },
+   {
+    "seed": 3,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 75
+   },
+   {
+    "seed": 4,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 48
+   },
+   {
+    "seed": 5,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 97
+   },
+   {
+    "seed": 6,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 53
+   },
+   {
+    "seed": 7,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 42
+   },
+   {
+    "seed": 8,
+    "n_p": 150,
+    "eaten": 1,
+    "n_o": 906,
+    "open_eaten": 28
+   },
+   {
+    "seed": 9,
+    "n_p": 150,
+    "eaten": 1,
+    "n_o": 906,
+    "open_eaten": 28
+   }
+  ],
+  "pairs_encoders: Chanterelle / Jack-o-lantern [CLIP-L]": [
+   {
+    "seed": 0,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 39
+   },
+   {
+    "seed": 1,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 45
+   },
+   {
+    "seed": 2,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 18
+   },
+   {
+    "seed": 3,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 39
+   },
+   {
+    "seed": 4,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 30
+   },
+   {
+    "seed": 5,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 100
+   },
+   {
+    "seed": 6,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 81
+   },
+   {
+    "seed": 7,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 81
+   },
+   {
+    "seed": 8,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 66
+   },
+   {
+    "seed": 9,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 43
+   }
+  ],
+  "pairs_encoders: Morel / False-morel [CLIP-L]": [
+   {
+    "seed": 0,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 1,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 2,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 3,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 4,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 5,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 6,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 7,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 8,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   },
+   {
+    "seed": 9,
+    "n_p": 120,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 0
+   }
+  ],
+  "pairs_encoders: Oyster / Jack-o-lantern [CLIP-L]": [
+   {
+    "seed": 0,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 4
+   },
+   {
+    "seed": 1,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 7
+   },
+   {
+    "seed": 2,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 1
+   },
+   {
+    "seed": 3,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 2
+   },
+   {
+    "seed": 4,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 3
+   },
+   {
+    "seed": 5,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 6
+   },
+   {
+    "seed": 6,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 6
+   },
+   {
+    "seed": 7,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 2
+   },
+   {
+    "seed": 8,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 4
+   },
+   {
+    "seed": 9,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 5
+   }
+  ],
+  "pairs_encoders: Puffball / Deathcap-button [CLIP-L]": [
+   {
+    "seed": 0,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 19
+   },
+   {
+    "seed": 1,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 19
+   },
+   {
+    "seed": 2,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 20
+   },
+   {
+    "seed": 3,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 22
+   },
+   {
+    "seed": 4,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 30
+   },
+   {
+    "seed": 5,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 48
+   },
+   {
+    "seed": 6,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 10
+   },
+   {
+    "seed": 7,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 17
+   },
+   {
+    "seed": 8,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 24
+   },
+   {
+    "seed": 9,
+    "n_p": 150,
+    "eaten": 0,
+    "n_o": 906,
+    "open_eaten": 22
+   }
+  ],
+  "hard_pairs: [control] Agaricus / Destroying-Angel [I-JEPA-H14]": [
+   {
+    "seed": 0,
+    "n_p": 150,
+    "eaten": 4
+   },
+   {
+    "seed": 1,
+    "n_p": 150,
+    "eaten": 6
+   },
+   {
+    "seed": 2,
+    "n_p": 150,
+    "eaten": 2
+   },
+   {
+    "seed": 3,
+    "n_p": 150,
+    "eaten": 8
+   },
+   {
+    "seed": 4,
+    "n_p": 150,
+    "eaten": 6
+   },
+   {
+    "seed": 5,
+    "n_p": 150,
+    "eaten": 3
+   },
+   {
+    "seed": 6,
+    "n_p": 150,
+    "eaten": 3
+   },
+   {
+    "seed": 7,
+    "n_p": 150,
+    "eaten": 5
+   },
+   {
+    "seed": 8,
+    "n_p": 150,
+    "eaten": 7
+   },
+   {
+    "seed": 9,
+    "n_p": 150,
+    "eaten": 9
+   }
+  ],
+  "hard_pairs: Honey-mushroom / Galerina (fatal) [I-JEPA-H14]": [
+   {
+    "seed": 0,
+    "n_p": 150,
+    "eaten": 6
+   },
+   {
+    "seed": 1,
+    "n_p": 150,
+    "eaten": 5
+   },
+   {
+    "seed": 2,
+    "n_p": 150,
+    "eaten": 8
+   },
+   {
+    "seed": 3,
+    "n_p": 150,
+    "eaten": 5
+   },
+   {
+    "seed": 4,
+    "n_p": 150,
+    "eaten": 6
+   },
+   {
+    "seed": 5,
+    "n_p": 150,
+    "eaten": 7
+   },
+   {
+    "seed": 6,
+    "n_p": 150,
+    "eaten": 4
+   },
+   {
+    "seed": 7,
+    "n_p": 150,
+    "eaten": 6
+   },
+   {
+    "seed": 8,
+    "n_p": 150,
+    "eaten": 5
+   },
+   {
+    "seed": 9,
+    "n_p": 150,
+    "eaten": 1
+   }
+  ],
+  "hard_pairs: Woodtuft / Galerina (microscope) [I-JEPA-H14]": [
+   {
+    "seed": 0,
+    "n_p": 150,
+    "eaten": 11
+   },
+   {
+    "seed": 1,
+    "n_p": 150,
+    "eaten": 3
+   },
+   {
+    "seed": 2,
+    "n_p": 150,
+    "eaten": 3
+   },
+   {
+    "seed": 3,
+    "n_p": 150,
+    "eaten": 13
+   },
+   {
+    "seed": 4,
+    "n_p": 150,
+    "eaten": 6
+   },
+   {
+    "seed": 5,
+    "n_p": 150,
+    "eaten": 9
+   },
+   {
+    "seed": 6,
+    "n_p": 150,
+    "eaten": 8
+   },
+   {
+    "seed": 7,
+    "n_p": 150,
+    "eaten": 8
+   },
+   {
+    "seed": 8,
+    "n_p": 150,
+    "eaten": 8
+   },
+   {
+    "seed": 9,
+    "n_p": 150,
+    "eaten": 3
+   }
+  ],
+  "hard_pairs: Honey-mushroom / Sulphur-tuft [I-JEPA-H14]": [
+   {
+    "seed": 0,
+    "n_p": 120,
+    "eaten": 21
+   },
+   {
+    "seed": 1,
+    "n_p": 120,
+    "eaten": 20
+   },
+   {
+    "seed": 2,
+    "n_p": 120,
+    "eaten": 24
+   },
+   {
+    "seed": 3,
+    "n_p": 120,
+    "eaten": 35
+   },
+   {
+    "seed": 4,
+    "n_p": 120,
+    "eaten": 24
+   },
+   {
+    "seed": 5,
+    "n_p": 120,
+    "eaten": 22
+   },
+   {
+    "seed": 6,
+    "n_p": 120,
+    "eaten": 27
+   },
+   {
+    "seed": 7,
+    "n_p": 120,
+    "eaten": 18
+   },
+   {
+    "seed": 8,
+    "n_p": 120,
+    "eaten": 45
+   },
+   {
+    "seed": 9,
+    "n_p": 120,
+    "eaten": 20
+   }
+  ],
+  "hard_pairs: Puffball / Earthball [I-JEPA-H14]": [
+   {
+    "seed": 0,
+    "n_p": 120,
+    "eaten": 1
+   },
+   {
+    "seed": 1,
+    "n_p": 120,
+    "eaten": 0
+   },
+   {
+    "seed": 2,
+    "n_p": 120,
+    "eaten": 3
+   },
+   {
+    "seed": 3,
+    "n_p": 120,
+    "eaten": 3
+   },
+   {
+    "seed": 4,
+    "n_p": 120,
+    "eaten": 3
+   },
+   {
+    "seed": 5,
+    "n_p": 120,
+    "eaten": 2
+   },
+   {
+    "seed": 6,
+    "n_p": 120,
+    "eaten": 4
+   },
+   {
+    "seed": 7,
+    "n_p": 120,
+    "eaten": 4
+   },
+   {
+    "seed": 8,
+    "n_p": 120,
+    "eaten": 3
+   },
+   {
+    "seed": 9,
+    "n_p": 120,
+    "eaten": 2
+   }
+  ],
+  "hard_pairs: [control] Agaricus / Destroying-Angel [DINOv2-L]": [
+   {
+    "seed": 0,
+    "n_p": 150,
+    "eaten": 2
+   },
+   {
+    "seed": 1,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 2,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 3,
+    "n_p": 150,
+    "eaten": 1
+   },
+   {
+    "seed": 4,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 5,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 6,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 7,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 8,
+    "n_p": 150,
+    "eaten": 1
+   },
+   {
+    "seed": 9,
+    "n_p": 150,
+    "eaten": 0
+   }
+  ],
+  "hard_pairs: Honey-mushroom / Galerina (fatal) [DINOv2-L]": [
+   {
+    "seed": 0,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 1,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 2,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 3,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 4,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 5,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 6,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 7,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 8,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 9,
+    "n_p": 150,
+    "eaten": 0
+   }
+  ],
+  "hard_pairs: Woodtuft / Galerina (microscope) [DINOv2-L]": [
+   {
+    "seed": 0,
+    "n_p": 150,
+    "eaten": 3
+   },
+   {
+    "seed": 1,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 2,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 3,
+    "n_p": 150,
+    "eaten": 2
+   },
+   {
+    "seed": 4,
+    "n_p": 150,
+    "eaten": 1
+   },
+   {
+    "seed": 5,
+    "n_p": 150,
+    "eaten": 1
+   },
+   {
+    "seed": 6,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 7,
+    "n_p": 150,
+    "eaten": 2
+   },
+   {
+    "seed": 8,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 9,
+    "n_p": 150,
+    "eaten": 2
+   }
+  ],
+  "hard_pairs: Honey-mushroom / Sulphur-tuft [DINOv2-L]": [
+   {
+    "seed": 0,
+    "n_p": 120,
+    "eaten": 0
+   },
+   {
+    "seed": 1,
+    "n_p": 120,
+    "eaten": 0
+   },
+   {
+    "seed": 2,
+    "n_p": 120,
+    "eaten": 1
+   },
+   {
+    "seed": 3,
+    "n_p": 120,
+    "eaten": 1
+   },
+   {
+    "seed": 4,
+    "n_p": 120,
+    "eaten": 1
+   },
+   {
+    "seed": 5,
+    "n_p": 120,
+    "eaten": 1
+   },
+   {
+    "seed": 6,
+    "n_p": 120,
+    "eaten": 1
+   },
+   {
+    "seed": 7,
+    "n_p": 120,
+    "eaten": 0
+   },
+   {
+    "seed": 8,
+    "n_p": 120,
+    "eaten": 0
+   },
+   {
+    "seed": 9,
+    "n_p": 120,
+    "eaten": 0
+   }
+  ],
+  "hard_pairs: Puffball / Earthball [DINOv2-L]": [
+   {
+    "seed": 0,
+    "n_p": 120,
+    "eaten": 0
+   },
+   {
+    "seed": 1,
+    "n_p": 120,
+    "eaten": 0
+   },
+   {
+    "seed": 2,
+    "n_p": 120,
+    "eaten": 0
+   },
+   {
+    "seed": 3,
+    "n_p": 120,
+    "eaten": 0
+   },
+   {
+    "seed": 4,
+    "n_p": 120,
+    "eaten": 0
+   },
+   {
+    "seed": 5,
+    "n_p": 120,
+    "eaten": 0
+   },
+   {
+    "seed": 6,
+    "n_p": 120,
+    "eaten": 0
+   },
+   {
+    "seed": 7,
+    "n_p": 120,
+    "eaten": 0
+   },
+   {
+    "seed": 8,
+    "n_p": 120,
+    "eaten": 0
+   },
+   {
+    "seed": 9,
+    "n_p": 120,
+    "eaten": 0
+   }
+  ],
+  "hard_pairs: [control] Agaricus / Destroying-Angel [CLIP-L]": [
+   {
+    "seed": 0,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 1,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 2,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 3,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 4,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 5,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 6,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 7,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 8,
+    "n_p": 150,
+    "eaten": 1
+   },
+   {
+    "seed": 9,
+    "n_p": 150,
+    "eaten": 1
+   }
+  ],
+  "hard_pairs: Honey-mushroom / Galerina (fatal) [CLIP-L]": [
+   {
+    "seed": 0,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 1,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 2,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 3,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 4,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 5,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 6,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 7,
+    "n_p": 150,
+    "eaten": 1
+   },
+   {
+    "seed": 8,
+    "n_p": 150,
+    "eaten": 0
+   },
+   {
+    "seed": 9,
+    "n_p": 150,
+    "eaten": 0
+   }
+  ],
+  "hard_pairs: Woodtuft / Galerina (microscope) [CLIP-L]": [
+   {
+    "seed": 0,
+    "n_p": 150,
+    "eaten": 3
+   },
+   {
+    "seed": 1,
+    "n_p": 150,
+    "eaten": 1
+   },
+   {
+    "seed": 2,
+    "n_p": 150,
+    "eaten": 3
+   },
+   {
+    "seed": 3,
+    "n_p": 150,
+    "eaten": 2
+   },
+   {
+    "seed": 4,
+    "n_p": 150,
+    "eaten": 1
+   },
+   {
+    "seed": 5,
+    "n_p": 150,
+    "eaten": 3
+   },
+   {
+    "seed": 6,
+    "n_p": 150,
+    "eaten": 5
+   },
+   {
+    "seed": 7,
+    "n_p": 150,
+    "eaten": 5
+   },
+   {
+    "seed": 8,
+    "n_p": 150,
+    "eaten": 1
+   },
+   {
+    "seed": 9,
+    "n_p": 150,
+    "eaten": 4
+   }
+  ],
+  "hard_pairs: Honey-mushroom / Sulphur-tuft [CLIP-L]": [
+   {
+    "seed": 0,
+    "n_p": 120,
+    "eaten": 0
+   },
+   {
+    "seed": 1,
+    "n_p": 120,
+    "eaten": 1
+   },
+   {
+    "seed": 2,
+    "n_p": 120,
+    "eaten": 2
+   },
+   {
+    "seed": 3,
+    "n_p": 120,
+    "eaten": 2
+   },
+   {
+    "seed": 4,
+    "n_p": 120,
+    "eaten": 3
+   },
+   {
+    "seed": 5,
+    "n_p": 120,
+    "eaten": 0
+   },
+   {
+    "seed": 6,
+    "n_p": 120,
+    "eaten": 5
+   },
+   {
+    "seed": 7,
+    "n_p": 120,
+    "eaten": 0
+   },
+   {
+    "seed": 8,
+    "n_p": 120,
+    "eaten": 2
+   },
+   {
+    "seed": 9,
+    "n_p": 120,
+    "eaten": 2
+   }
+  ],
+  "hard_pairs: Puffball / Earthball [CLIP-L]": [
+   {
+    "seed": 0,
+    "n_p": 120,
+    "eaten": 0
+   },
+   {
+    "seed": 1,
+    "n_p": 120,
+    "eaten": 0
+   },
+   {
+    "seed": 2,
+    "n_p": 120,
+    "eaten": 1
+   },
+   {
+    "seed": 3,
+    "n_p": 120,
+    "eaten": 1
+   },
+   {
+    "seed": 4,
+    "n_p": 120,
+    "eaten": 0
+   },
+   {
+    "seed": 5,
+    "n_p": 120,
+    "eaten": 1
+   },
+   {
+    "seed": 6,
+    "n_p": 120,
+    "eaten": 1
+   },
+   {
+    "seed": 7,
+    "n_p": 120,
+    "eaten": 1
+   },
+   {
+    "seed": 8,
+    "n_p": 120,
+    "eaten": 0
+   },
+   {
+    "seed": 9,
+    "n_p": 120,
+    "eaten": 0
+   }
+  ]
+ }
+}
