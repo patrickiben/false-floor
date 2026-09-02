@@ -29,7 +29,7 @@ PATTERNS = [
     (r"\[(?:TOOL|REASON|INSERT|TODO|FIXME|PLACEHOLDER|NAME|DATE|XXX+)\]", "unfilled placeholder"),
     (r"\blorem ipsum\b", "placeholder text"),
     (r"\bXXXX\b", "unfilled placeholder"),
-    (r"<[^>]*(?:your text here|insert[^>]*here)[^>]*>", "unfilled placeholder"),
+    (r"<[^<>]*(?:your text here|insert[^<>]*here)[^<>]*>", "unfilled placeholder"),  # [^<>] not [^>]: a stray "<" in a PDF text layer otherwise lets this span the whole document and match "inserted ... here"
     (r"\bplaceholder\b", "literal 'placeholder'"),
     (r"\bTBD\b|\bTK\b(?![A-Za-z])", "to-be-done marker"),
     (r"\bcitation needed\b", "unfinished citation"),
