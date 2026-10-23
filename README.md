@@ -1,5 +1,22 @@
 # A False Floor
 
+**Current paper and reproducibility records (23 October 2026):**
+*A False Floor: Refuting Our Own Information-Limit Claim in a Lethal Identification Task*
+was submitted to PLOS ONE on 22 October 2026. Read the
+[current preprint](https://doi.org/10.5281/zenodo.23578222) and
+[reproducibility records](https://doi.org/10.5281/zenodo.23569075).
+
+This private repository preserves an earlier TMLR-era source snapshot. Its
+manuscript, titles, experiment framing, and validation ledger are historical;
+they are not the current submitted paper. The six previously local commits
+through 2 September are retained on
+[`archive/local-2026-09-02`](https://github.com/patrickiben/false-floor/tree/archive/local-2026-09-02),
+including per-seed counts and validation fixes. They have not been promoted to
+the current manuscript. Use the DOI records above for the current scope and
+archived inputs.
+
+## Historical snapshot
+
 Code and manuscript for *"A False Floor: How a Weak Baseline and a Curated Benchmark Produced an 'Information Limit' on a Lethal Recognition Task that a Stronger Baseline then Refuted."*
 
 A cautionary methods study. An investigation concluded that "should I eat this mushroom?" is **information-limited** — a strong aggregate separability coexisting with an irreducible confidently-wrong residual no method removed. Swapping the frozen, mean-pooled I-JEPA backbone for a stronger frozen encoder (DINOv2) refuted that conclusion. The same pattern reproduces across **six lethal look-alike decisions in five biological groups** (fungi, plants, reptiles, arachnids, amphibians), three of them re-examinations of externally-published indistinguishability claims (coral-snake mimicry, brown-recluse misidentification, poison-frog mimicry). The lesson: a limitation claim is only as strong as the baseline that fails to beat it, and a verification discipline built to catch false positives is blind to false negatives.
