@@ -1,0 +1,35 @@
+{
+  "repo": "false-floor",
+  "recordId": 23578222,
+  "doi": "10.5281/zenodo.23578222",
+  "conceptDoi": "10.5281/zenodo.23519299",
+  "version": "v2",
+  "title": "A false floor: Refuting our own information-limit claim in a lethal identification task",
+  "retrievedAt": "2026-10-23T23:12:30.713210+00:00",
+  "latestVerified": true,
+  "files": [
+    {
+      "filename": "Iben_2026_A_False_Floor_preprint_v2.pdf",
+      "url": "https://zenodo.org/api/records/23578222/files/Iben_2026_A_False_Floor_preprint_v2.pdf/content",
+      "sha256": "ca83ef3cfcedeea504ad20281787b07d7dea04f797c450e9f356d9729bf2a761",
+      "md5": "md5:ae3fb3bca6c5cf05de6f8a2bcb98da48",
+      "bytes": 1041324
+    },
+    {
+      "filename": "Fig1.tif",
+      "url": "https://zenodo.org/api/records/23578222/files/Fig1.tif/content",
+      "sha256": "069c874224469f8f009fd9e3d071be7ba550b39ec1fdf5f3b5a3b1575c143e5d",
+      "md5": "md5:7c01733812f24389366ecdfe6d90c626",
+      "bytes": 1009628
+    },
+    {
+      "filename": "Iben_2026_A_False_Floor_S1_Appendix.pdf",
+      "url": "https://zenodo.org/api/records/23578222/files/Iben_2026_A_False_Floor_S1_Appendix.pdf/content",
+      "sha256": "52d9fb7630123d435747e105f7e520c0281ae691ddb4a4ae21fe89f12c74410d",
+      "md5": "md5:2d92de3c2cbfb4e2f8bf215f52923544",
+      "bytes": 337328
+    }
+  ],
+  "educationalScope": "Source-locked text explanation; no independent empirical replication, full G14 signoff or human learner validation claimed.",
+  "originals": "Original manuscripts, data, figures and license files are not modified or redistributed by this addition."
+}

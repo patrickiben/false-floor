@@ -15,6 +15,12 @@ including per-seed counts and validation fixes. They have not been promoted to
 the current manuscript. Use the DOI records above for the current scope and
 archived inputs.
 
+## Educational companion
+
+Read the [plain-language companion](education/COMPANION.md) for definitions, worked examples,
+source locators, and exercises with answers. Its [source and review notes](education/README.md)
+bind it to the current v2 preprint and S1 Appendix, rather than this historical source snapshot.
+
 ## Historical snapshot
 
 Code and manuscript for *"A False Floor: How a Weak Baseline and a Curated Benchmark Produced an 'Information Limit' on a Lethal Recognition Task that a Stronger Baseline then Refuted."*
