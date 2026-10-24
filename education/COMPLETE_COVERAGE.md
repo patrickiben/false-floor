@@ -66,6 +66,6 @@ F04 teaches conditional false-eat/yield. F06 distinguishes the old point fractio
 
 The full bibliography is accounted for as the exact source’s reference index. Cited work is explained where it supplies biological context, formal machinery, provenance or comparison practice. This companion does not pretend to teach or independently validate the full contents of every cited paper. Funding, interests, authorship, ethics and assistance statements are expressly identified as declarations, not additional experiments. F56 and the source’s publication record retain that distinction.
 
-## Status and preservation
+## Reading routes
 
-The short guide files are preserved byte-for-byte as STUDY_GUIDE.md and STUDY_GUIDE.pdf. The parent renders the new complete PDF and updates ARTIFACTS.json. Original paper/code/data/license files are unchanged; this repository remains private. This is an AI-assisted educational-fidelity expansion, not a full G14, human learner, accessibility or independent empirical-validation signoff.
+The [concise guide](STUDY_GUIDE.md) introduces the central argument. The [complete companion](COMPANION.md) develops all source items mapped above. Both use the exact preprint and appendix identified at the start of this map.

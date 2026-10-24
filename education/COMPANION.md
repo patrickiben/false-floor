@@ -6,7 +6,7 @@ This companion follows the current *A false floor: Refuting our own information-
 
 The [concise study guide](STUDY_GUIDE.md) is the shorter route. This complete route develops the argument in smaller units rather than summarizing the paper into a few broad lessons. Each unit identifies its source passage, explains its role and meaning, labels the evidence, develops reasoning, preserves the relevant boundary and supplies a question with an answer. Revisited findings serve different purposes in results, methods, figure-reading and limitation units. The final coverage map accounts for every substantive section, table, figure, formal proposition and the administrative record.
 
-All empirical counts and model results are **reported by the source**, not newly reproduced here. Hypothetical examples and arithmetic illustrations are explicitly labeled. This educational work is not a full G14 validation, a scientific validity certificate or evidence from tested learners. Original scientific files, data, code and licenses remain unchanged. The concise files are preserved, and the repository remains private.
+All empirical counts and model results are **reported by the source**, rather than reproduced here. Hypothetical examples and arithmetic illustrations are explicitly labeled. This is an educational explanation, not an independent empirical replication.
 
 ### Boundaries that apply to every unit
 
@@ -67,7 +67,7 @@ Trying more downstream methods does not necessarily challenge that bottleneck. T
 
 **Passage role:** preserves the original claim and method history so the self-refutation can be audited.
 
-**Plain-language explanation:** The archived `MANUSCRIPT.md` is the investigation whose interpretation is being challenged. It contains the original sweep, decision apparatus and claims. The current source describes about fifteen methods, grouped in S1 into thirteen families. An older teaching document’s count of about eighteen is not the basis for this edition. The families include more data, metric learning, resampling, divergence/transport objectives, augmentation, metadata, conformal methods, planning, active inference and several geometric or generative approaches.
+**Plain-language explanation:** The archived `MANUSCRIPT.md` is the investigation whose interpretation is being challenged. It contains the original sweep, decision apparatus and claims. The current source describes about fifteen methods, grouped in S1 into thirteen families. The families include more data, metric learning, resampling, divergence/transport objectives, augmentation, metadata, conformal methods, planning, active inference and several geometric or generative approaches.
 
 Merely listing them does not demonstrate that each independently measured the information in the original image. S1 also notes fine-tuning results and alternative yield-matched readings that already suggested lower residuals, but whose surviving evidence is the archived document rather than a run log. The archive reports fine-tuned ResNet means of 3.8% at 80% yield and 0.4% at 60%, with standard deviations 0.8 and 0.3 percentage points; its same-acquisition frozen comparison is 8.1% and 3.1%. Other archived I-JEPA yield-matched means are 1.6% at 80% and 0.5% at 60%. These historical values lack surviving run logs and do not become new audited counts. Preserving that distinction keeps the historical record from being retroactively made cleaner or stronger than it is.
 
@@ -353,7 +353,7 @@ A paper can contain many evaluations, while one eligible same-source evaluation 
 
 These distinctions matter more than the blanket label preregistered. A hash can show whether a retained file changed relative to the digest; without an external timestamp, it does not independently prove when the file existed. The source explicitly describes its dates as self-dated and states that some design decisions were delegated to the model operator without separate author sign-offs. The companion must not invent a stronger advance-registration or approval record to make the project look tidier.
 
-**Evidence type:** reported chronology and provenance artifacts, with internally dated rather than externally certified timing. This is not a human learning or scientific-validation signoff.
+**Evidence type:** reported chronology and provenance artifacts, with internally dated rather than externally certified timing. Self-dated provenance is distinct from an externally certified timestamp.
 
 **Reasoning or worked illustration:** A hypothetical researcher writes a plan at noon, examines results at one, and adds a new analysis at two. Hashing both files is useful, but it does not make the two-o’clock analysis preplanned relative to the first results. It can be honestly precommitted before execution while still being post hoc to earlier evidence. The out-of-fold analysis has exactly the kind of distinction a reader should ask about: before its own computation, after the main outcome was already known.
 
@@ -1083,7 +1083,7 @@ The source narrows the BioCLIP exclusion to shared source-distribution and label
 
 The eight-encoder script was reconstructed from a surviving log and common evaluation code; an original copy was later found and compared. That history matters because a reconstructed script and an original artifact are different provenance states even when their reported outputs match. The point of the ledger is to make each number’s producing operation identifiable, not to imply that one command reproduces every acquisition and rights check.
 
-**Evidence type:** source-reported reproducibility procedure and comparisons on archived caches. This companion has not downloaded the complete image collection or rerun every model.
+**Evidence type:** source-reported reproducibility procedure and comparisons on archived caches.
 
 **Reasoning or worked illustration:** A hypothetical evaluator reproduces a capped run with 60 poison images and gets a zero. The paper’s full run uses 150. Identical displayed rates do not mean the bound or experiment matches. Reading the invocation and cache provenance is therefore as important as reading the output. Similarly, a number-to-log match demonstrates traceability, while a clean-room execution with the required inputs demonstrates another layer of reproduction.
 
@@ -1147,7 +1147,7 @@ Funding, interests, contributions and ethics are declarations, not extra experim
 
 **Reasoning or worked illustration:** A hypothetical project can provide careful code, retained errors and a candid assistance statement while still needing independent reproduction. Transparency makes checking possible; it does not complete every check. Equally, acknowledging AI assistance does not turn real photographs into synthetic data. The source distinguishes measurement inputs from model-coded judgments, and a learner should preserve that separation.
 
-**Boundary/nonclaim:** no human learner results, author teaching signoff, full G14 pass or food-safety assurance is supplied by this educational text. The repository remains private and its historical scientific snapshot remains intact. The new complete companion is a teaching layer over the exact current preprint, not a replacement scientific manuscript.
+**Boundary/nonclaim:** the source’s disclosures do not establish food-safety assurance or independent scientific validity. This explanation is not a replacement for the exact preprint.
 
 **Self-check:** What is the most defensible closing sentence for a reader who understands the full paper?
 
@@ -1239,7 +1239,7 @@ This ledger is a compact reference beside the developed lessons. Settings and fo
 
 ## Twelve answered transfer questions
 
-These are self-study checks, not administered learner results. The answers demonstrate intended reasoning, not verified teaching success.
+Try each self-study question before reading its answer.
 
 1. **A medical-image team says the modality cannot detect a condition after five models fail. What first distinguishes model failure from observation failure?** Test a strong, substantially different representation on the same patient-separated data and clinically relevant operating constraint, with provenance and count-based uncertainty. A successful scoped counterexample challenges the broad attribution; failure of a few more models does not prove impossibility.
 2. **A classifier rejects every case and has no harmful clearances. Has it solved the constrained task?** No. Its yield is zero. Compare error at the required yield and do not hide abstention behind an attractive harmful rate.
@@ -1254,8 +1254,8 @@ These are self-study checks, not administered learner results. The answers demon
 11. **A replay reproduces stored hash-join outputs. Has the image acquisition reproduced?** Not necessarily. Reacquiring images, computing fresh hashes and repeating network confirmations are earlier links requiring separate inputs and checks.
 12. **A stronger image model overturns a broad information-floor claim. What remains before deployment?** A defensible target population, prospective data, acceptable loss and yield, unknown-species handling, individual-case limitations and an operational validation plan. In this paper, real foraging still calls for abstention under uncertainty.
 
-## Source and review record
+## Exact source
 
 Exact manuscript: [Zenodo record 23578222, v2](https://doi.org/10.5281/zenodo.23578222), `Iben_2026_A_False_Floor_preprint_v2.pdf`, SHA-256 `ca83ef3cfcedeea504ad20281787b07d7dea04f797c450e9f356d9729bf2a761`. Relevant supplement on the same record: `Iben_2026_A_False_Floor_S1_Appendix.pdf`, SHA-256 `52d9fb7630123d435747e105f7e520c0281ae691ddb4a4ae21fe89f12c74410d`. The [version 4 records deposit](https://doi.org/10.5281/zenodo.23569075) is a distinct reproducibility record, not the manuscript.
 
-[COMPLETE_COVERAGE.md](COMPLETE_COVERAGE.md) maps every substantive main/S1 section, table, figure, proposition and limitation, and explicitly accounts for references and administrative matter. The previous concise MD/PDF remain byte-for-byte copies as `STUDY_GUIDE.*`. This teaching addition alters no original paper, data, result or license and changes no repository visibility. It uses AI assistance and has not undergone a human learner, accessibility or transfer study. It does not claim full G14 completion or independent empirical replication.
+[COMPLETE_COVERAGE.md](COMPLETE_COVERAGE.md) maps every substantive main/S1 section, table, figure, proposition and limitation, and identifies references and administrative matter. The [concise guide](STUDY_GUIDE.md) provides a shorter reading route.

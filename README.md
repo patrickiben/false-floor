@@ -21,7 +21,7 @@ Choose the [concise study guide](education/STUDY_GUIDE.md) ([PDF](education/STUD
 for the overview, or the [complete passage-by-passage companion](education/COMPANION.md)
 ([PDF](education/COMPANION.pdf)) for the full current-paper and S1 teaching route.
 The [education notes](education/README.md) and [coverage map](education/COMPLETE_COVERAGE.md)
-give exact source provenance and review limits. This repository remains private.
+give exact source provenance and scope. This repository remains private.
 
 ## Historical snapshot
 

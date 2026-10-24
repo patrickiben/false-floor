@@ -12,7 +12,7 @@ The central distinction is simple: a photograph can contain a useful clue that o
 
 The basis is Patrick Iben’s *A false floor: Refuting our own information-limit claim in a lethal identification task*, **Zenodo v2, record 23578222**, deposited in October 2026. The [source record](https://doi.org/10.5281/zenodo.23578222) contains the main preprint and S1 Appendix. Its 90-page preprint file combines 65 main-text pages and the 25-page appendix. Page locators below use the printed main-text pages or the appendix’s own 1–25 numbering.
 
-This guide follows that version, including its corrections, measured training-catalog overlap, field audit and post hoc analyses. Earlier TMLR and workshop teaching copies are not its evidence basis. The historical `companion/MANUSCRIPT.md` in this repository is the original investigation being criticized, not this educational guide.
+This guide follows that version, including its corrections, measured training-catalog overlap, field audit and post hoc analyses. The historical `companion/MANUSCRIPT.md` in this repository is the original investigation being criticized, not this educational guide.
 
 ## 1. The vocabulary and the question
 
@@ -197,15 +197,13 @@ The paper’s four mechanisms explain why a believable story can still fail: a w
 
 Answer to the §1 “Try it” prompt: test a stronger or substantially different representation on the same original images, with the same task, held-out split procedure and yield constraint. Success would show that the first representation discarded usable signal; repeated failures alone would still not prove that the original images lack it.
 
-These are suggested answers for self-study. No learner study, human grading or transfer assessment has been conducted for this guide.
+These are suggested answers for self-study.
 
 ## Source and reproducibility notes
 
-All empirical statements above summarize the preprint, not a new reanalysis. The guide’s small probability calculations are independently recomputed for arithmetic checking. Original data, images, weights and scientific manuscripts are unchanged.
+All empirical statements above summarize the preprint. Small probability calculations illustrate its uncertainty conventions; they are not a new reanalysis.
 
 - Main source: [Zenodo v2 record 23578222](https://doi.org/10.5281/zenodo.23578222), file `Iben_2026_A_False_Floor_preprint_v2.pdf`, SHA-256 `ca83ef3cfcedeea504ad20281787b07d7dea04f797c450e9f356d9729bf2a761`.
 - Supplement: same record, `Iben_2026_A_False_Floor_S1_Appendix.pdf`, SHA-256 `52d9fb7630123d435747e105f7e520c0281ae691ddb4a4ae21fe89f12c74410d`.
 - Catalog and field-audit records cited by this version: [Zenodo record 23569075, version 4](https://doi.org/10.5281/zenodo.23569075). These are records, not the manuscript.
 - The paper’s data-availability and S1 §J distinguish replay of retained hashes and joins from re-hashing nonredistributed photographs, and document platform changes in some nonzero counts. This guide does not claim a full image-level reproduction.
-
-Prepared 23 October 2026 with AI assistance as a source-locked educational explanation. Its review covers textual fidelity and teaching structure. It does not certify the preprint’s scientific validity, full G14 completion, accessibility for every reader or human learner validation. This private repository’s visibility is unchanged.
