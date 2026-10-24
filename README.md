@@ -6,7 +6,7 @@ was submitted to PLOS ONE on 22 October 2026. Read the
 [current preprint](https://doi.org/10.5281/zenodo.23578222) and
 [reproducibility records](https://doi.org/10.5281/zenodo.23569075).
 
-This private repository preserves an earlier TMLR-era source snapshot. Its
+This repository preserves an earlier TMLR-era source snapshot. Its
 manuscript, titles, experiment framing, and validation ledger are historical;
 they are not the current submitted paper. The six previously local commits
 through 2 September are retained on
@@ -21,7 +21,7 @@ Choose the [concise study guide](education/STUDY_GUIDE.md) ([PDF](education/STUD
 for the overview, or the [complete passage-by-passage companion](education/COMPANION.md)
 ([PDF](education/COMPANION.pdf)) for the full current-paper and S1 teaching route.
 The [education notes](education/README.md) and [coverage map](education/COMPLETE_COVERAGE.md)
-give exact source provenance and scope. This repository remains private.
+give exact source provenance and scope.
 
 ## Historical snapshot
 
