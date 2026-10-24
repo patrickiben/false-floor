@@ -15,11 +15,13 @@ including per-seed counts and validation fixes. They have not been promoted to
 the current manuscript. Use the DOI records above for the current scope and
 archived inputs.
 
-## Educational companion
+## Educational companions
 
-Read the [plain-language companion](education/COMPANION.md) for definitions, worked examples,
-source locators, and exercises with answers. Its [source and review notes](education/README.md)
-bind it to the current v2 preprint and S1 Appendix, rather than this historical source snapshot.
+Choose the [concise study guide](education/STUDY_GUIDE.md) ([PDF](education/STUDY_GUIDE.pdf))
+for the overview, or the [complete passage-by-passage companion](education/COMPANION.md)
+([PDF](education/COMPANION.pdf)) for the full current-paper and S1 teaching route.
+The [education notes](education/README.md) and [coverage map](education/COMPLETE_COVERAGE.md)
+give exact source provenance and review limits. This repository remains private.
 
 ## Historical snapshot
 

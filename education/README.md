@@ -1,10 +1,8 @@
-# A False Floor: education
+# A False Floor: two reading routes
 
-[Download the companion PDF](COMPANION.pdf).
-
-Learn why a weak model can create an apparent information limit, how the current counterexample is bounded, and what the provenance audit does and does not establish.
-
-Read [COMPANION.md](COMPANION.md). It is written for readers new to the methods and includes definitions before technical terms, practical examples, six source-guided lessons, and twelve exercises with an answer key. Hypothetical examples are labeled; all empirical findings remain attributed to the source.
+- [Concise study guide](STUDY_GUIDE.md) ([PDF](STUDY_GUIDE.pdf)): the preserved eight-page overview with definitions and exercises.
+- [Complete companion](COMPANION.md) ([PDF](COMPANION.pdf)): fifty-seven developed passage-by-passage units across the main paper and S1, with formal statements, all tables/figures, corrections, an implementation ledger, glossary and answered transfer test.
+- [Complete coverage map](COMPLETE_COVERAGE.md): source sections and supplementary material mapped to teaching units, including reference and administrative handling.
 
 ## Source lock
 
